@@ -7,127 +7,124 @@
 *
 * Description:
 * 检查给定信用卡号的有效性，如果有效则给出对应所属公司.
+* 测试卡号:
+* VISA:4003600000000014, 4012888888881881
+* AMEX:378282246310005, 371449635398431
+* Mastercard:5555555555554444, 5105105105105100
 */
 
 #include <cs50.h>
 #include <stdio.h>
 
-int get_length(long long int num);
-int is_card(long long int num);
-int company(long long int num);
+int get_len(long long int num);     //获取输入数字的长度并返回长度
+int is_card(long long int num);     //校验信用卡号
+int get_comp_code(long long int num);             //获取卡号开头两位数，visa特殊取40-49第一位含4
+
 
 int main(void)
 {
-	long long int number = 0;	//获取信用卡数字
+    //获取用户输入
+    long long int card_number;
 
-	do
-	{
-		number = get_long_long("Please in put the number: ");
-	}
-	while (number < 0);		//只能输入大于0的数字
+    do
+    {
+        card_number = get_long_long("Please in put your card number: ");
+    }
+    while (card_number < 0);
 
-	int length = get_length(number);
+    
+    int card_len = get_len(card_number);
+	
+	//计算数字长度，如果长度符合则校验判断是否属于信用卡，如果不是则INVALID
+    if ((card_len == 13 || card_len == 15 || card_len == 16) && is_card(card_number) != 0)
+    {
+        int card = get_comp_code(card_number);     //获取卡号开头用来判断公司归属
 
-	//判断是否是信用卡信用卡
-	if ((length == 15 || length == 13 || length == 16) && is_card(number) == 1)
-	{
-		//是信用卡
-		int card = company(number);		//获取卡号开头用来判断公司归属
+        if ((card == 34 || card == 37) && card_len == 15)
+        {
+            //American Express美国运通卡15位数字以 34 或 37 开头
+            printf("AMEX\n");
+        }
+        else if ((card == 51 || card == 52 || card == 53 || card == 54 || card == 55) && card_len == 16)
+        {
+            //MasterCard万事达卡16位数字 51、52、53、54  55 开头
+            printf("MASTERCARD\n");
+        }
+        else if (card >= 40 && card <= 49 && (card_len == 13 || card_len == 16))
+        {
+            //Visa卡13和16位数字4开头
+            printf("VISA\n");
+        }
+        else
+        {
+            //是信用卡但是不知道公司归属
+            printf("I don't know!");
+        }
+    }
+    else
+    {
+        printf("INVALID\n");
+    }
 
-		if ((card == 34 || card == 37) && length == 15)
-		{
-			//American Express美国运通卡15位数字以 34 或 37 开头
-			printf("AMES\n");
-		}
-		else if ((card == 51 || card == 52 || card == 53 || card == 54 || card == 55) && length == 16)
-		{
-			//MasterCard万事达卡16位数字 51、52、53、54  55 开头
-			printf("MASTERCARD\n");
-		}
-		else if (card >= 40 && card <= 49 && (length == 13 || length == 16))
-		{
-			//Visa卡13和16位数字4开头
-			printf("VISA\n");
-		}
-		else
-		{
-			//是信用卡但是不知道公司归属
-			printf("I don't know!");
-		}
-	}
-	else
-	{
-		//不是信用卡
-		printf("INVALID\n");
-
-	}
 }
 
-int company(long long int num)
+int get_comp_code(long long int num)
 {
-	//获取卡号的开头两位数字
-	while (num > 99)
-	{
-		num /= 10;
-	}
+    while (num > 99)
+    {
+        num /= 10;
+    }
 
-	return num;
+    return num;
 }
 
 int is_card(long long int num)
 {
-	//利用算法判断信用卡校验和是否正确，是返回1，否返回0
-	int sum = 0;
-	int conut = 1;
-	int dig = 0;
+    //校验卡号是否正确
+    int sum = 0;
+    int count = 1;
 
-	while (num != 0)
-	{
-		dig = num % 10;
+    //循环所有数字并进行相加
+    while (num > 0)
+    {
+        int digit = num % 10;
+        num /= 10;
 
-		if (conut % 2 == 0)
-		{
-			if (dig * 2 > 9)
-			{
-				sum = sum + (dig * 2 - 9);
-			}
-			else
-			{
-				sum += dig * 2;
-			}
-		}
-		else
-		{
-			sum += dig;
-		}
+        if (count % 2 == 0)
+        {
+            if (digit * 2 > 9)
+            {
+                sum += digit * 2 - 9;
+            }
+            else
+            {
+                sum += digit * 2;
+            }
+        }
+        else
+        {
+            sum += digit;
+        }
 
-		num /= 10;
+        count++;
+    }
 
-		conut++;
-	}
-
-	if (sum % 10 == 0)
-	{
-		return 1;
-	}
-	else
-	{
-		return 0;
-	}
-
+    //校验卡号
+    return sum % 10 == 0;
 }
 
-int get_length(long long int num)
+int get_len(long long int num)
 {
-	//获取用户输入数字的长度
-	int lenght = 0;
+    //获取输入数字的长度并返回长度
+    int len = 0;
 
-	while (num > 0)
-	{
-		num /= 10;
-		lenght += 1;
-	}
+    while (num > 0)
+    {
+        num /= 10;
+        len++;
+    }
 
-	//printf("%i\n", lenght);
-	return lenght;
+    return len;
 }
+
+
