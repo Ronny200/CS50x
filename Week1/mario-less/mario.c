@@ -1,3 +1,14 @@
+/*
+* File: mario.c
+* Author: Ronny.H <yq.worm@gmail.com>
+* Copyright (c) 2024, Ronny.H
+* Public Domain.
+* Version: 1.0
+*
+* Description:
+* 根据输入的数字简单输出单边#字塔
+*/
+
 #include <cs50.h>
 #include <stdio.h>
 
@@ -5,6 +16,7 @@ int main(void)
 {
     // 输入一个数字，如果不是正数则不断提问
     int n;
+
     do
     {
         n = get_int("Please in put a number: ");
@@ -24,6 +36,7 @@ int main(void)
         {
             printf("#");
         }
+
         printf("\n");
     }
 }

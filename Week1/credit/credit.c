@@ -1,15 +1,15 @@
 /*
-* File: example.h
+* File: credit.c
 * Author: Ronny.H <yq.worm@gmail.com>
 * Copyright (c) 2024, Ronny.H
 * Public Domain.
 * Version: 1.0
 *
 * Description:
-* 检查给定信用卡号的有效性.
+* 检查给定信用卡号的有效性，如果有效则给出对应所属公司.
 */
 
-#include <cs50.c>
+#include <cs50.h>
 #include <stdio.h>
 
 int get_length(long long int num);
