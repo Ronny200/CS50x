@@ -25,14 +25,13 @@ int get_comp_code(long long int num);
 
 int main(void)
 {
-	// 获取用户输入
 	long long int card_number;
 	
 	do
 	{
 		card_number = get_long_long("Please in put your card number: ");
 	}
-	while (card_number < 0);
+	while (card_number <= 0);
 	
 	int card_len = get_len(card_number);
 	
@@ -68,9 +67,9 @@ int main(void)
 	}
 }
 
+// 获取卡号头两位数用来获取来源公司
 int get_comp_code(long long int num)
 {
-	// 获取卡号头两位数用来获取来源公司
 	while (num > 99)
 	{
 		num /= 10;
@@ -79,9 +78,9 @@ int get_comp_code(long long int num)
 	return num;
 }
 
+// 校验卡号是否正确
 int is_card(long long int num)
 {
-	// 校验卡号是否正确
 	int sum = 0;
 	int count = 1;
 	
@@ -112,9 +111,9 @@ int is_card(long long int num)
 	return sum % 10 == 0;
 }
 
+// 获取输入数字的长度并返回长度
 int get_len(long long int num)
 {
-	// 获取输入数字的长度并返回长度
 	int len = 0;
 	
 	while (num > 0)

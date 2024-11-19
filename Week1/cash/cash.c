@@ -16,7 +16,6 @@
 
 int main(void)
 {
-	// 定义找零总数
 	int number = 0;
 	int money;
 	
