@@ -42,7 +42,7 @@ int main(void)
     return 0;
 }
 
-//统计字母，单词，句子的数量并返回Coleman-Liau 指数
+// 统计字母，单词，句子的数量并返回Coleman-Liau 指数
 int get_index(string text)
 {
     int letters = 0;
@@ -66,7 +66,7 @@ int get_index(string text)
     }
 
     words += 1;
-    int L = letters / (float)words * 100;
-    int S = sentences / (float)words * 100;
+    float L = (float) letters / words * 100;
+    float S = (float) sentences / words * 100;
     return round(0.0588 * L - 0.296 * S - 15.8);
 }
