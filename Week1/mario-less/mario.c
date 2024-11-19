@@ -1,13 +1,13 @@
-/*
-* File: mario.c
-* Author: Ronny.H <yq.worm@gmail.com>
-* Copyright (c) 2024, Ronny.H
-* Public Domain.
-* Version: 1.0
-*
-* Description:
-* 根据输入的数字简单输出单边#字塔
-*/
+/**
+ * File: mario.c
+ * Author: Ronny.H <yq.worm@gmail.com>
+ * Copyright (c) 2024, Ronny.H
+ * Public Domain.
+ * Version: 1.0
+ *
+ * Description:
+ * 根据输入的数字简单输出单边#字塔
+ */
 
 #include <cs50.h>
 #include <stdio.h>
