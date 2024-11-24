@@ -54,7 +54,7 @@ void merge(int list[], int left, int right, int mid)
 
     while (i < n1 && j < n2)
     {
-        if (L[i] < L[j])
+        if (L[i] < R[j])
         {
             list[k] = L[i];
             i++;
