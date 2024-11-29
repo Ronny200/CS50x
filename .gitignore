@@ -56,3 +56,8 @@ dkms.conf
 *.png
 *.jpeg
 *.jpg
+*.raw
+
+# compress
+*.zip
+*.7z
