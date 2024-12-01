@@ -1,3 +1,6 @@
 {
-    "explorer.excludeGitIgnore": false
+    "explorer.excludeGitIgnore": false,
+    "gitdoc.enabled": true,
+    "editor.fontFamily": "Maple Mono NF, Consolas, 'Courier New', monospace",
+    "editor.fontSize": 16
 }
