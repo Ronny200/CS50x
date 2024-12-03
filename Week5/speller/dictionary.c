@@ -44,8 +44,9 @@ bool load(const char *dictionary)
 
     // 读取字典单词
     unsigned int head;
-    node *word = malloc(sizeof(node));
-    if (word == NULL)
+    char *word;
+    node *new_node = malloc(sizeof(node));
+    if (new_node == NULL)
     {
         return false;
     }
