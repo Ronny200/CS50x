@@ -35,7 +35,7 @@ unsigned int hash(const char *word)
 // Loads ` into memory, returning true if successful, else false
 bool load(const char *dictionary)
 {
-    // TODO
+    
     return false;
 }
 
