@@ -46,31 +46,22 @@ bool load(const char *dictionary)
     }
 
     // 读取字典单词
-    unsigned int head;
-    char *word = malloc(siezeof(LENGTH + 1));
-    node *new_node = malloc(sizeof(node));
-    if (new_node == NULL)
-    {
-        return false;
-    }
-
+    char word(LENGTH + 1);
     while(fcanf(source, "%s", word) != EOF)
     {
-        head = hash(word);
-        strcpy(new_node->word, word);
-        if (table[head] == NULL)
+        int num = hash(word);
+        node *new_node = malloc(sizeof(node));
+        if (new_node == NULL)
         {
-            new_node->next = NULL;
-            table[head]->next = new_node;
-            continue;
+            return false;
         }
-        new_node->next = table[head]->next;
-        table[head]->next = new_node;
+        scrcpy(new_node->word ,word);
+        new_node->next = table[num];
+        table[num] = new_node;
     }
 
     //释放
     fclose(source);
-    free(word);
     free(new_node);
     return true;
 }
