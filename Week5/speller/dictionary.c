@@ -44,7 +44,7 @@ bool load(const char *dictionary)
 
     // 读取字典单词
     unsigned int head;
-    char *word ;
+    char *word = malloc(siezeof(LENGTH + 1));
     node *new_node = malloc(sizeof(node));
     if (new_node == NULL)
     {
@@ -54,6 +54,7 @@ bool load(const char *dictionary)
     while(fcanf(source, "%s", word) != EOF)
     {
         head = hash(word);
+        new_node->word = strcpy()
         if (table[head] == NULL)
         {
             table[head]->next = new_node;
@@ -65,6 +66,7 @@ bool load(const char *dictionary)
     //释放
     fclose(source);
     free(word);
+    free(new_node);
     return false;
 }
 
