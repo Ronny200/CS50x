@@ -23,6 +23,7 @@ char random_allele();
 int main(void)
 {
     // Seed random number generator
+    // 随机获取血型，范围A,B,O
     srand(time(0));
 
     // Create a new family with three generations
@@ -115,6 +116,7 @@ void print_family(person *p, int generation)
 // Randomly chooses a blood type allele.
 char random_allele()
 {
+    // 任何整数取余3结果为0,1,2三个
     int r = rand() % 3;
     if (r == 0)
     {
