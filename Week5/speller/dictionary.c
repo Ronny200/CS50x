@@ -69,7 +69,7 @@ bool load(const char *dictionary)
     fclose(source);
     free(word);
     free(new_node);
-    return false;
+    return true;
 }
 
 // Returns number of words in dictionary if loaded, else 0 if not yet loaded
