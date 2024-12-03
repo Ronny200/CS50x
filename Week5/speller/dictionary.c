@@ -33,7 +33,12 @@ bool check(const char *word)
 unsigned int hash(const char *word)
 {
     // TODO: Improve this hash function
-    return toupper(word[0]) - 'A';
+    unsigned int index = toupper(word[0]) - 'A';
+    if (index >= N)
+    {
+        index %= N;
+    }
+    return index;
 }
 
 // Loads ` into memory, returning true if successful, else false
@@ -50,7 +55,7 @@ bool load(const char *dictionary)
     char word[LENGTH + 1];
     while(fscanf(source, "%s", word) != EOF)
     {
-        int num = hash(word);
+        unsigned int num = hash(word);
         node *new_node = malloc(sizeof(node));
         if (new_node == NULL)
         {
