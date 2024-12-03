@@ -66,7 +66,7 @@ bool load(const char *dictionary)
 
     // 读取字典单词
     char word[LENGTH + 1];
-    while(fscanf(source, "%s", word) != EOF)
+    while (fscanf(source, "%s", word) != EOF)
     {
         unsigned int num = hash(word);
         node *new_node = malloc(sizeof(node));
@@ -74,7 +74,7 @@ bool load(const char *dictionary)
         {
             return false;
         }
-        strcpy(new_node->word ,word);
+        strcpy(new_node->word, word);
         new_node->next = table[num];
         table[num] = new_node;
         dict_size++;
@@ -100,13 +100,13 @@ bool unload(void)
     for (int i = 0; i < N; i++)
     {
         node *n = table[i];
-        while(n != NULL)
+        while (n != NULL)
         {
             node *tmp = n;
             n = n->next;
             free(tmp);
         }
-        if (i == N-1 && n == NULL)
+        if (i == N - 1 && n == NULL)
         {
             return true;
         }
