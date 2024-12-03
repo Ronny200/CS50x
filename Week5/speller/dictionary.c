@@ -40,14 +40,14 @@ unsigned int hash(const char *word)
 bool load(const char *dictionary)
 {
     // 打开字典
-    FILE *source = fopen(dictionary, 'r');
+    FILE *source = fopen(dictionary, "r");
     if (source == NULL)
     {
         return false;
     }
 
     // 读取字典单词
-    char word(LENGTH + 1);
+    char word[LENGTH + 1];
     while(fcanf(source, "%s", word) != EOF)
     {
         int num = hash(word);
