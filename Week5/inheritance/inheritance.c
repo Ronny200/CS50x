@@ -27,6 +27,7 @@ int main(void)
     srand(time(0));
 
     // Create a new family with three generations
+    创建一个新的指定数值的家庭，默认为3
     person *p = create_family(GENERATIONS);
 
     // Print family tree of blood types
