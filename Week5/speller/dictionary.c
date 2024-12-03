@@ -44,7 +44,7 @@ bool load(const char *dictionary)
     }
 
     // 读取字典单词
-
+    while(fcanf(source, ))
 
     //释放
     fclose(source);
