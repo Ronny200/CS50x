@@ -44,7 +44,11 @@ bool load(const char *dictionary)
     }
 
     // 读取字典单词
-    while(fcanf(source, ))
+    node *word = malloc(sizeof(node));
+    while(fcanf(source, "%s", word) != EOF)
+    {
+        
+    }
 
     //释放
     fclose(source);
