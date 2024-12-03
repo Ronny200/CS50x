@@ -26,6 +26,10 @@ unsigned int dict_size = 0;
 bool check(const char *word)
 {
     // TODO
+    unsigned int index = hash(word);
+    
+
+
     return false;
 }
 
