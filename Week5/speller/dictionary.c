@@ -59,6 +59,7 @@ bool load(const char *dictionary)
         {
             new_node->next = NULL;
             table[head]->next = new_node;
+            continue;
         }
         new_node->next = table[head]->next;
         table[head]->next = new_node;
