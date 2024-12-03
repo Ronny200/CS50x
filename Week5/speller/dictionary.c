@@ -43,8 +43,13 @@ bool load(const char *dictionary)
     }
 
     // 读取字典单词
+    unsigned int head;
     node *word = malloc(sizeof(node));
-    unsigned int *head = malloc(sizeof(unsigned int));
+    if (word == NULL)
+    {
+        return false;
+    }
+
     while(fcanf(source, "%s", word) != EOF)
     {
         head = hash(word);
