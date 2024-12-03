@@ -54,9 +54,10 @@ bool load(const char *dictionary)
     while(fcanf(source, "%s", word) != EOF)
     {
         head = hash(word);
-        new_node->word = strcpy()
+        strcpy(new_node->word, word);
         if (table[head] == NULL)
         {
+            new_node->next = NULL;
             table[head]->next = new_node;
         }
         new_node->next = table[head]->next;
