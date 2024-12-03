@@ -35,7 +35,15 @@ unsigned int hash(const char *word)
 // Loads ` into memory, returning true if successful, else false
 bool load(const char *dictionary)
 {
-    
+    // 打开字典
+    FILE *source = fopen(dictionary, 'r');
+    if (source == NULL)
+    {
+        return false;
+    }
+
+    // 读取字典单词
+    fclose(source);
     return false;
 }
 
