@@ -244,7 +244,7 @@
     "CS50_GH_USER": "${localEnv:GITHUB_USER}",
     "LANG": "${localEnv:CS50_LANG}",
     "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}",
-    "TZ": "${localEnv:CS50_TZ}",
+    "TZ": "Asia/Shanghai",
     "DISPLAY": "${localEnv:DISPLAY}"
   }
 }
