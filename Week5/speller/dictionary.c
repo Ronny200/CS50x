@@ -56,9 +56,11 @@ bool load(const char *dictionary)
         head = hash(word);
         if (table[head] == NULL)
         {
-            table[head]->
+            table[head]->next = new_node;
         }
-        table[head]
+        new_node->next = table[head]->next;
+        table[head]->next = new_node;
+        
     }
 
     //释放
