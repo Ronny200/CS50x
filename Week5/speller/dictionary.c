@@ -14,7 +14,6 @@ typedef struct node
 
 // TODO: Choose number of buckets in hash table
 const unsigned int N = 26;
-const unsigned int dict_arr[N] = {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z};
 
 // Hash table
 node *table[N];
@@ -49,7 +48,7 @@ bool load(const char *dictionary)
     while(fcanf(source, "%s", word) != EOF)
     {
         head = hash(word);
-        
+
 
     }
 
