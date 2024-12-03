@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 
 #include "dictionary.h"
 
@@ -23,17 +24,23 @@ node *table[N];
 unsigned int dict_size = 0;
 
 // Returns true if word is in dictionary, else false
+// 对哈希表中的链表进行搜索，如果匹配返回true
 bool check(const char *word)
 {
     // TODO
     unsigned int index = hash(word);
-    
-
-
+    for (node *ptr = table[index]; ptr != NULL; ptr = ptr->next)
+    {
+        if (strcasecmp(ptr->word, word) == 0)
+        {
+            return true;
+        }
+    }
     return false;
 }
 
 // Hashes word to a number
+// 对单词开头取索引数，如果大于26则对N取余
 unsigned int hash(const char *word)
 {
     // TODO: Improve this hash function
@@ -46,6 +53,7 @@ unsigned int hash(const char *word)
 }
 
 // Loads ` into memory, returning true if successful, else false
+
 bool load(const char *dictionary)
 {
     // 打开字典
