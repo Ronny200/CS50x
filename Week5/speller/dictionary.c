@@ -14,6 +14,7 @@ typedef struct node
 
 // TODO: Choose number of buckets in hash table
 const unsigned int N = 26;
+const unsigned 
 
 // Hash table
 node *table[N];
@@ -43,6 +44,9 @@ bool load(const char *dictionary)
     }
 
     // 读取字典单词
+
+
+    //释放
     fclose(source);
     return false;
 }
