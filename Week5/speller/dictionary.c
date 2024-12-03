@@ -53,6 +53,7 @@ unsigned int hash(const char *word)
 }
 
 // Loads ` into memory, returning true if successful, else false
+// 将字典加载到内存并统计单词个数
 
 bool load(const char *dictionary)
 {
@@ -79,7 +80,6 @@ bool load(const char *dictionary)
         dict_size++;
     }
 
-    //释放
     fclose(source);
     return true;
 }
@@ -92,6 +92,8 @@ unsigned int size(void)
 }
 
 // Unloads dictionary from memory, returning true if successful, else false
+// 循环释放table表中的所有内存
+
 bool unload(void)
 {
     // TODO
