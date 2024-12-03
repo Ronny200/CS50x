@@ -20,6 +20,7 @@ const unsigned int N = 26;
 
 // Hash table
 node *table[N];
+unsigned int dict_size = 0;
 
 // Returns true if word is in dictionary, else false
 bool check(const char *word)
@@ -58,6 +59,7 @@ bool load(const char *dictionary)
         scrcpy(new_node->word ,word);
         new_node->next = table[num];
         table[num] = new_node;
+        dict_size++;
     }
 
     //释放
