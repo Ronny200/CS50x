@@ -44,7 +44,7 @@ bool load(const char *dictionary)
 
     // 读取字典单词
     unsigned int head;
-    char *word;
+    char *word ;
     node *new_node = malloc(sizeof(node));
     if (new_node == NULL)
     {
@@ -60,7 +60,6 @@ bool load(const char *dictionary)
         }
         new_node->next = table[head]->next;
         table[head]->next = new_node;
-        
     }
 
     //释放
