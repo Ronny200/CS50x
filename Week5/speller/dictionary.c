@@ -45,13 +45,18 @@ bool load(const char *dictionary)
 
     // 读取字典单词
     node *word = malloc(sizeof(node));
+    unsigned int *head = malloc(sizeof(unsigned int));
     while(fcanf(source, "%s", word) != EOF)
     {
+        head = hash(word);
         
+
     }
 
     //释放
     fclose(source);
+    free(word);
+    free(head);
     return false;
 }
 
