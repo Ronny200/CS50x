@@ -54,14 +54,16 @@ bool load(const char *dictionary)
     while(fcanf(source, "%s", word) != EOF)
     {
         head = hash(word);
-
-
+        if (table[head] == NULL)
+        {
+            table[head]->
+        }
+        table[head]
     }
 
     //释放
     fclose(source);
     free(word);
-    free(head);
     return false;
 }
 
