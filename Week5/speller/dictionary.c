@@ -104,6 +104,10 @@ bool unload(void)
             n = n->next;
             free(tmp);
         }
+        if (i == N-1 && n == NULL)
+        {
+            return true;
+        }
     }
     return false;
 }
