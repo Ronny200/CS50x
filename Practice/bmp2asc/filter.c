@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "helpers.h"
+#include "base64.c"
 
 // 定义长参数结构
 static struct option long_options[] = {
@@ -133,9 +134,8 @@ int main(int argc, char *argv[])
             break;
 
         case 'i':
-            printf("convert ascii\n");
-            // blur(height, width, image);
-            // write_outfile(height, width, padding, outptr, image, bf, bi);
+            ascii(height, width, image);
+            write_outfile(height, width, padding, outptr, image, bf, bi);
             break;
 
         default:
