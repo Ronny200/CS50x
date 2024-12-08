@@ -1,1 +1,1 @@
-SELECT name, tempo FROM songs ORDER BY tempo LIMIT 10;
+SELECT name FROM songs ORDER BY tempo;
