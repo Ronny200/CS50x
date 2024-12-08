@@ -1,2 +1,2 @@
 SELECT title FROM movies
-JOIN 
+JOIN people ON 
