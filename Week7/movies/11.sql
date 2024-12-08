@@ -1,1 +1,2 @@
-SELECT 
+SELECT title FROM movies
+JOIN 
