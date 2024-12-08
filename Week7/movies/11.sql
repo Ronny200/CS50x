@@ -1,2 +1,3 @@
 SELECT title FROM movies
-JOIN stars W
+JOIN ratings ON movies.id = ratings.movie_id
+WHERE ratings.rating
