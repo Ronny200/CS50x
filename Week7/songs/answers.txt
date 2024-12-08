@@ -1,4 +1,5 @@
-1. 我会分别获取听众在2018年最爱前100首歌曲的能量、愉悦度和舞蹈性的平均值，这3个平均值代表听众对歌曲某种特性的喜爱。
+1.
+I will separately calculate the average values of energy, valence (pleasure), and danceability for the top 100 songs that the listener loved in 2018. These three average values will represent the listener's preference for specific characteristics of the songs.
 
 2.
 For the improvement plan, I will obtain all attributes of the top 100 songs in the playlist, excluding the ID and name, and calculate the average value for each attribute. By comparing the average values of each attribute with the specific attribute values of each song within these 100 tracks, we can determine the listeners' preferences for different musical features. The smaller the difference between an attribute's average value and its corresponding value in each song, the stronger the listener's preference for that type of musical feature.
