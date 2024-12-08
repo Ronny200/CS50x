@@ -1,2 +1,5 @@
 SELECT title FROM movies
-JOIN stars ON
+JOIN people ON people.name = 'Chadwick Boseman'
+JOIN stars ON stars.person_id = people.id
+JOIN 
+
