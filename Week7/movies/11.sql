@@ -1,2 +1,2 @@
 SELECT title FROM movies
-JOIN people ON 
+JOIN stars ON
