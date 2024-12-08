@@ -1,3 +1,6 @@
 1. 我会分别获取听众在2018年最爱前100首歌曲的能量、愉悦度和舞蹈性的平均值，这3个平均值代表听众对歌曲某种特性的喜爱。
 
-2. 改进方案的话，我会获取前100首歌曲除了id和name之外的所有属性并计算他们的平均值，通过对比每种属性的平均值与这100首歌曲中每首歌对应属性的具体数值的差距，我们可以确定听众对不同音乐特征的偏好，差距越小说明听众对这种类型最喜欢，然后将剩下的属性按照同样的方法计算，最后将属性偏差从最小到最大的顺序来计算Audio Aura，这样可以优先保证最前面的偏差最小的属性都是用户最喜欢的类型。
+2.
+For the improvement plan, I will obtain all attributes of the top 100 songs in the playlist, excluding the ID and name, and calculate the average value for each attribute. By comparing the average values of each attribute with the specific attribute values of each song within these 100 tracks, we can determine the listeners' preferences for different musical features. The smaller the difference between an attribute's average value and its corresponding value in each song, the stronger the listener's preference for that type of musical feature.
+
+Subsequently, I will apply the same method to analyze the remaining attributes. Finally, I will rank the attributes based on the magnitude of deviation from smallest to largest to compute the "Audio Aura". This approach ensures that the attributes with the smallest deviations, indicating the highest listener preference, are prioritized at the top of the list.
