@@ -51,7 +51,7 @@ WHERE
     AND atm_transactions.transaction_type = 'withdraw';
 
 -- 通过上面线索进行过滤
-SELECT people.name, people.passport_number FROM people
+SELECT DISTINCT people.name, people.passport_number FROM people
 JOIN bakery_security_logs
     ON people.license_plate = bakery_security_logs.license_plate
 JOIN phone_calls
