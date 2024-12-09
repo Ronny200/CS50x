@@ -11,6 +11,12 @@
 -- bank_accounts         -- 银行账户
 -- passengers            -- 乘客
 
+/** 根据采访记录可以判断：
+    1. 小偷在盗窃的10分钟内从面包店停车场上车也就是
+    2.
+*/
+
+
 -- 根据结构查看2023年7月28日Humphrey街的记录
 SELECT description FROM crime_scene_reports
 WHERE year = 2023 AND month = 7 AND day = 28
