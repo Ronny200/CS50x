@@ -96,6 +96,9 @@ JOIN bakery_security_logs bsl ON bsl.license_plate = p.license_plate
     AND bsl.hour = 10 AND bsl.minute > 15 AND bsl.minute < 25
 JOIN bank_accounts ba ON ba.person_id = p.id
 JOIN atm_transactions at ON at.account_number = ba.account_number
+    AND at.month = 7 AND at.day = 28
+    AND at.atm_location = 'Leggett Street'
+    AND at.transaction_type = 'withdraw'
 ;
 
 
