@@ -89,9 +89,13 @@ ORDER BY hour, minute limit 1;
 SELECT DISTINCT p.name FROM people p
 JOIN passengers ps ON p.passport_number = ps.passport_number
 JOIN flights f ON f.id = ps.flight_id AND f.day = 29
-JOIN airports a ON a.id = f.origin_airport_id AND a.city = 'Fiftyville';
-JOIn phone_calls p ON p.caller = p.phone_number
-
+JOIN airports a ON a.id = f.origin_airport_id AND a.city = 'Fiftyville'
+JOIn phone_calls pc ON pc.caller = p.phone_number AND pc.day = 28 AND pc.duration < 60
+JOIN bakery_security_logs bsl ON bsl.license_plate = p.license_plate
+    AND bsl.activity = 'exit' AND bsl.day = 28
+    AND bsl.hour = 10 AND bsl.minute > 15 AND bsl.minute < 25
+JOIN bank_accounts ba ON ba.person_id = p.id
+JOIN atm_transactions at ON at.account_number = ba.account_number
 ;
 
 
