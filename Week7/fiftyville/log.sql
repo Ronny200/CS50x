@@ -11,14 +11,6 @@
 -- bank_accounts         -- 银行账户
 -- passengers            -- 乘客
 
-/** 根据采访记录可以判断：
-    1. 小偷在盗窃的10分钟内从面包店停车场上车也就是 10:15 -- 10:25阶段走的
-    select * from bakery_security_logs  where year = 2023 and month = 7 and day = 28 and hour >9 and minute > 14 and hour < 11 and minute < 26;
-    2. 小偷在早上去银行提款机取过钱
-    3. 小偷在10:15 -- 10:25 阶段给同伙打过电话，计划7月29日坐飞机离开
-*/
-
-
 -- 查看2023年7月28日Humphrey街的犯罪记录获知鸭子被盗时间为10:15
 SELECT description FROM crime_scene_reports
 WHERE year = 2023 AND month = 7 AND day = 28
@@ -40,5 +32,7 @@ WHERE day = 28 AND hour > 9 and minute > 14 and hour < 11 and minute < 26;
 -- 根据线索查看10:15 -- 10:25通多电话的人
 SELECT caller FROM phone_calls
 WHERE month = 7 AND day = 28;
+
+-- 根据线索查看28号早上取过钱的人
 
 
