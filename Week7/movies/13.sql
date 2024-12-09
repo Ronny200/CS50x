@@ -1,4 +1,8 @@
-SELECT name FROM people
+SELECT name FROM people WHERE(
+    SELECT person_id FROM stars WHERE
+    (
+        SELECT person_id FR
+    )
+)
 
-JOIN stars ON stars.person_id = people.id
-WHERE people.name in 'Kevin Bacon' AND birth = 1985;
+
