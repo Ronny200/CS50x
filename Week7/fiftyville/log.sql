@@ -109,7 +109,7 @@ WHERE p.name = 'Bruce';
 
 -- 小偷的同伙为和小偷通话的人
 SELECT name FROM people p
-JOIN phone_calls pc ON p.phone_number = pc.caller WHERE month = 7 AND day = 28 AND duration < 60
+JOIN phone_calls pc ON p.phone_number = pc.receiver WHERE month = 7 AND day = 28 AND duration < 60
 
 
 
