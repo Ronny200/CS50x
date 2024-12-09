@@ -114,4 +114,3 @@ JOIN phone_calls pc ON p.phone_number = pc.receiver AND month = 7 AND day = 28 A
 JOIN people p2 ON p2.phone_number = pc.caller
 WHERE p2.name = 'Bruce';
 
-
