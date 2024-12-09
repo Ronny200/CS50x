@@ -22,7 +22,7 @@
 -- 查看2023年7月28日Humphrey街的犯罪记录获知鸭子被盗时间为10:15
 SELECT description FROM crime_scene_reports
 WHERE year = 2023 AND month = 7 AND day = 28
-AND street = 'Humphrey Street' AND description LIKE '%CS50 duck%';
+AND street = 'Humphrey Street' AND description LIKE '%thief%';
 
 --
 SELECT transcript FROM interviews
