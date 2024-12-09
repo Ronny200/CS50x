@@ -71,7 +71,7 @@ WHERE
     AND bakery_security_logs.day = 28;
 
 -- 继续加入线索，7月29日离开的人
-SELECT DISTINCT people.name FROM people
+SELECT DISTINCT people.name,  FROM people
 JOIN flights
     ON flights.id = passengers.flight_id
 JOIN passengers
@@ -94,4 +94,5 @@ WHERE
     AND phone_calls.day = 28
     AND bakery_security_logs.month = 7
     AND bakery_security_logs.day = 28
-    AND ;
+    AND flights.month = 7
+    AND flights.day = 29;
