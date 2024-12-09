@@ -22,7 +22,7 @@ SELECT hour, minute, activity, license_plate FROM bakery_security_logs
 WHERE day = 28 AND hour > 9;
 
 -- 根据面包店纪录中的车牌寻找嫌疑人的信息
-SELECT name, phone_number,passport_number  FROM people
+SELECT name, phone_number,passport_number, bakery_security_logs.day  FROM people
 JOIN bakery_security_logs
 ON people.license_plate = bakery_security_logs.license_plate
 WHERE bakery_security_logs.day = 28;
