@@ -23,7 +23,7 @@ AND street = 'Humphrey Street';
 .scheme bakery_security_logs
 
 SELECT hour, minute, activity, license_plate FROM bakery_security_logs
-WHERE day = 28 AND hour < 11;
+WHERE day = 28 AND 11 > hour > 10;
 
-
+--
 
