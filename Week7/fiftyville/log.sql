@@ -42,14 +42,19 @@ AND transaction_type = 'withdraw';
 SELECT passport_number FROM people
 JOIN bakery_security_logs
     ON people.license_plate = bakery_security_logs.license_plate
-JOIN caller
-    ON
+JOIN phone_calls
+    ON people.phone_number = phone_calls.caller
 JOIN bank_accounts
     ON people.id = bank_accounts.person_id
 JOIN atm_transactions
     ON bank_accounts.account_number = atm_transactions.account_number
 
 WHERE
-    atm_transactions.month = 7 AND atm_transactions.day = 28
+    atm_transactions.month = 7
+    AND atm_transactions.day = 28
     AND atm_location = 'Leggett Street'
-    AND transaction_type = 'withdraw';
+    AND transaction_type = 'withdraw'
+    AND phone_calls.month = 7
+    AND phone_calls.day = 28
+    AND bakery_security_logs.month = 7
+    AND bakery_security_logs.day = 28;
