@@ -25,4 +25,4 @@ CREATE TABLE bakery_security_logs (
     PRIMARY KEY(id)
 );
 SELECT activity FROM bakery_security_logs
-WHERE hour = 10 AND minute = 15;
+WHERE hour = 10 AND minute = 14;
