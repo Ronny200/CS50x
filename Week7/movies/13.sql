@@ -1,4 +1,4 @@
-SELECT COUNT(name) FROM people WHERE ID IN
+SELECT name FROM people WHERE ID IN
 (
     SELECT DISTINCT person_id FROM stars
     WHERE movie_id IN (
@@ -10,6 +10,3 @@ SELECT COUNT(name) FROM people WHERE ID IN
         )
     )
 ) AND name != 'Kevin Bacon';
-
-
-
