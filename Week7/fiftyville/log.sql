@@ -37,6 +37,10 @@ AND transcript LIKE '%thief%';
 SELECT hour, minute, activity, license_plate FROM bakery_security_logs
 WHERE day = 28 AND hour > 9 and minute > 14 and hour < 11 and minute < 26;
 
+-- 根据线索查看10:15 -- 10:25通多电话的人
+SELECT hour, minute, activity, license_plate FROM bakery_security_logs
+WHERE day = 28 AND hour > 9 and minute > 14 and hour < 11 and minute < 26;
+
 -- 根据面包店纪录中的车牌寻找嫌疑人的信息
 SELECT DISTINCT name, phone_number,passport_number, bakery_security_logs.day  FROM people
 JOIN bakery_security_logs
