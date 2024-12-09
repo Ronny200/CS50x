@@ -19,11 +19,15 @@
 */
 
 
--- 查看2023年7月28日Humphrey街的犯罪记录获知鸭子被盗时间为10:15，并提出面包店有很大现已
+-- 查看2023年7月28日Humphrey街的犯罪记录获知鸭子被盗时间为10:15
 SELECT description FROM crime_scene_reports
 WHERE year = 2023 AND month = 7 AND day = 28
-AND street = 'Humphrey Street' AND description LIKE '%bakery%';
+AND street = 'Humphrey Street' AND description LIKE '%CS50 duck%';
 
+--
+SELECT interviews FROM crime_scene_reports
+WHERE year = 2023 AND month = 7 AND day = 28
+AND street = 'Humphrey Street' AND interviews LIKE '%duck%';
 
 -- 根据现场报告查看面包店的信息
 SELECT hour, minute, activity, license_plate FROM bakery_security_logs
