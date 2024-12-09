@@ -123,21 +123,19 @@ WHERE
     AND atm_transactions.day = 28
     AND atm_location = 'Leggett Street'
     AND transaction_type = 'withdraw'
-    ;
+    (
+        SELECT DISTINCT people.name FROM people
+        JOIN bakery_security_logs
+            ON people.license_plate = bakery_security_logs.license_plate
+        JOIN phone_calls
+            ON people.phone_number = phone_calls.caller
+        WHERE
+            phone_calls.month = 7 AND phone_calls.day = 28
+            AND bakery_security_logs.month = 7
+            AND bakery_security_logs.day = 28
+            AND bakery_security_logs.hour > 9
+            AND bakery_security_logs.minute >14
+            AND bakery_security_logs.hour < 11
+            AND bakery_security_logs.minute < 26 );
 
-
-JOIN bakery_security_logs
-    ON people.license_plate = bakery_security_logs.license_plate
-JOIN phone_calls
-    ON people.phone_number = phone_calls.caller
-WHERE
-
-    AND phone_calls.month = 7
-    AND phone_calls.day = 28
-    AND bakery_security_logs.month = 7
-    AND bakery_security_logs.day = 28
-    AND bakery_security_logs.hour > 9
-    AND bakery_security_logs.minute >14
-    AND bakery_security_logs.hour < 11
-    AND bakery_security_logs.minute < 26
 
