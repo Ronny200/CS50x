@@ -88,7 +88,10 @@ ORDER BY hour, minute limit 1;
 根据所有线索先追踪小偷
 SELECT DISTINCT p.name FROM people p
 JOIN passengers ps ON p.passport_number = ps.passport_number
-JOIN flights f ON f.origin_airport_id = airports.id
+JOIN flights f ON f.id = ps.flight_id
+JOIN airports a ON a.id = f.origin_airport_id
+WHERE a.city = 'Fiftyville' and f.day = 29
+ORDER BY hour, minute;
 
 
 
