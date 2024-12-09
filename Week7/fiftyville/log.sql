@@ -116,30 +116,42 @@ WHERE people.id IN
         ON passengers.flight_id = flights.id
     JOIN airports
         ON flights.destination_airport_id = airports.id
-    WHERE flights.month = 7 AND flights.day = 29
-)
+    WHERE flights.month = 7 AND flights.day = 29 AND people.id IN
+    (
+        SELECT DISTINCT people.id FROM people
+        JOIN bank_accounts
+            ON people.id = bank_accounts.person_id
+        JOIN atm_transactions
+            ON bank_accounts.account_number = atm_transactions.account_number
+        WHERE
+            atm_transactions.month = 7
+            AND atm_transactions.day = 28
+            AND atm_location = 'Leggett Street'
+            AND transaction_type = 'withdraw'
+            AND people.id IN
+            (
+                SELECT DISTINCT people.id FROM people
+                JOIN bakery_security_logs
+                    ON people.license_plate = bakery_security_logs.license_plate
+                JOIN phone_calls
+                    ON people.phone_number = phone_calls.caller
+                WHERE
+                    AND phone_calls.month = 7
+                    AND phone_calls.day = 28
+                    AND bakery_security_logs.month = 7
+                    AND bakery_security_logs.day = 28
+                    AND bakery_security_logs.hour > 9
+                    AND bakery_security_logs.minute >14
+                    AND bakery_security_logs.hour < 11
+                    AND bakery_security_logs.minute < 26
+            )
+    )
+);
 
 
 
-JOIN bank_accounts
-    ON people.id = bank_accounts.person_id
-JOIN atm_transactions
-    ON bank_accounts.account_number = atm_transactions.account_number
-JOIN bakery_security_logs
-    ON people.license_plate = bakery_security_logs.license_plate
-JOIN phone_calls
-    ON people.phone_number = phone_calls.caller
-WHERE
-    atm_transactions.month = 7
-    AND atm_transactions.day = 28
-    AND atm_location = 'Leggett Street'
-    AND transaction_type = 'withdraw'
-    AND phone_calls.month = 7
-    AND phone_calls.day = 28
-    AND bakery_security_logs.month = 7
-    AND bakery_security_logs.day = 28
-    AND bakery_security_logs.hour > 9
-    AND bakery_security_logs.minute >14
-    AND bakery_security_logs.hour < 11
-    AND bakery_security_logs.minute < 26
+
+
+
+
 
