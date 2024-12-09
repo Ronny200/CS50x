@@ -29,8 +29,6 @@ WHERE day = 28 AND hour > 9 AND hour < 11 AND minute < 15;
 SELECT name, phone_number,passport_number  FROM people
 JOIN bakery_security_logs
 ON people.license_plate = bakery_security_logs.license_plate
-WHERE bakery_security_logs.day = 28
-AND bakery_security_logs.hour < 11
-AND bakery_security_logs.hour > 9
-AND bakery_security_logs.activity = 'exit';
+WHERE bakery_security_logs.day = 28;
 
+SELECT * FROM interviews;
