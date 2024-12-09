@@ -25,5 +25,8 @@ AND street = 'Humphrey Street';
 SELECT hour, minute, activity, license_plate FROM bakery_security_logs
 WHERE day = 28 AND 11 > hour > 10;
 
---
+-- 根据面包店纪录中的车牌寻找嫌疑人的信息
+SELECT * FROM people
+JOIN crime_scene_reports
+ON people.license_plate = crime_scene_reports.license_plate;
 
