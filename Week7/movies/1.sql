@@ -1,2 +1,2 @@
-SELECT title FROM movies
+SELECT COUNT(title) FROM movies
 WHERE year = 2008;
