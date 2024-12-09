@@ -15,7 +15,7 @@ SELECT transcript FROM interviews
 WHERE year = 2023 AND month = 7 AND day = 28
 AND transcript LIKE '%thief%';
 
--- 根据线索查看面包店10:15 -- 10:25之间离开的人
+/** 根据线索查看面包店10:15 -- 10:25之间离开的人
 -- | Barry   |
 -- | Bruce   |
 -- | Diana   |
@@ -24,6 +24,7 @@ AND transcript LIKE '%thief%';
 -- | Luca    |
 -- | Sofia   |
 -- | Vanessa |
+*/
 SELECT DISTINCT name FROM people
 JOIN bakery_security_logs bsl
     ON bsl.license_plate = people.license_plate
@@ -33,26 +34,38 @@ WHERE month = 7 AND day = 28
 ORDER BY name;
 
 
--- 根据线索查看10:15 -- 10:25通电话的人
--- | Benista |
--- | Bruce   |
--- | Carina  |
--- | Diana   |
--- | Kelsey  |
--- | Kenny   |
--- | Sofia   |
--- | Taylor  |
+/** 根据线索查看10:15 -- 10:25通电话的人
+| Benista |
+| Bruce   |
+| Carina  |
+| Diana   |
+| Kelsey  |
+| Kenny   |
+| Sofia   |
+| Taylor  |
+*/
 SELECT DISTINCT name FROM people
 JOIN phone_calls ON people.phone_number = phone_calls.caller
 WHERE month = 7 AND day = 28 AND duration < 60
 ORDER BY name;
 
+/** 同犯同时段电话
+| Anna       |
+| Doris      |
+| Jack       |
+| Jacqueline |
+| James      |
+| Larry      |
+| Melissa    |
+| Philip     |
+| Robin      |
+*/
 SELECT DISTINCT name FROM people
 JOIN phone_calls ON people.phone_number = phone_calls.receiver
 WHERE month = 7 AND day = 28 AND duration < 60
 ORDER BY name;
 
--- 通过银行账号获取取钱人的信息
+/** 通过银行账号获取取钱人的信息
 -- | Benista |
 -- | Brooke  |
 -- | Bruce   |
@@ -61,6 +74,7 @@ ORDER BY name;
 -- | Kenny   |
 -- | Luca    |
 -- | Taylor  |
+*/
 SELECT DISTINCT name FROM people
 JOIN bank_accounts
     ON people.id = bank_accounts.person_id
@@ -103,7 +117,7 @@ JOIN people p ON p.passport_number = pe.passport_number
 WHERE p.name = 'Bruce';
 
 -- 小偷的同伙为和小偷通话的人
-| Robin |
+-- | Robin |
 SELECT p.name FROM people p
 JOIN phone_calls pc ON p.phone_number = pc.receiver
     AND month = 7 AND day = 28 AND duration < 60
