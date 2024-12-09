@@ -102,7 +102,7 @@ JOIN atm_transactions at ON at.account_number = ba.account_number
 -- 确定小偷要去的城市
 SELECT a.city FROM airports a
 JOIN flights f ON f.destination_airport_id = a.id
-JOIN passengers pe ON pe.flight_id = f.destination_airport_id
+JOIN passengers pe ON pe.flight_id = f.id
 JOIN people p ON p.passport_number = pe.passport_number
 WHERE p.name = 'Bruce';
 
