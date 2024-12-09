@@ -13,6 +13,7 @@
 
 /** 根据采访记录可以判断：
     1. 小偷在盗窃的10分钟内从面包店停车场上车也就是 10:15 -- 10:25阶段走的
+    select * from bakery_security_logs  where year = 2023 and month = 7 and day = 28 and hour >9 and minute > 14 and hour < 11 and minute < 26;
     2. 小偷在早上去银行提款机取过钱
     3. 小偷在10:15 -- 10:25 阶段给同伙打过电话，计划7月29日坐飞机离开
 */
