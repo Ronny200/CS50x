@@ -20,4 +20,4 @@ JOIN people p2 ON s2.person_id = p2.id
 WHERE p2.name = 'Kevin Bacon'
 AND P2.birth = 1958
 AND p1.name != 'Kevin Bacon'
-GROUP BY p1.id);
+GROUP BY p1.id, p1.name);
