@@ -13,10 +13,10 @@ SELECT name FROM people WHERE ID IN
 
 执行13.sql生成一个有 1 列和 182 行的表。
 
-SELECT COUNT(name) FROM people p1
+SELECT name FROM people p1
 JOIN stars s1 ON p1.id = s1.person_id
 JOIN stars s2 ON s1.movie_id = s2.movie_id
-JOIN people p2 ON s2.movie_id = p2.id
+JOIN people p2 ON s2.person_id = p2.id
 WHERE p2.name = 'Kevin Bacon'
 AND P2.birth = 1958
 AND p1.name != 'Kevin Bacon';
