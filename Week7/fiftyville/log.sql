@@ -37,7 +37,7 @@ AND transcript LIKE '%thief%';
 SELECT DISTINCT name FROM people
 JOIN bakery_security_logs
     ON bakery_security_logs.license_plate = people.license_plate
-WHERE day = 28 AND hour > 9 and minute > 14 and hour < 11 and minute < 26
+WHERE day = 28 AND hour = 10 AND minute > 15 AND minute < 25 AND 
 ORDER BY name;
 
 
