@@ -41,7 +41,7 @@ WHERE day = 28 AND hour > 9 and minute > 14 and hour < 11 and minute < 26
 ORDER BY name;
 
 
--- 根据线索查看10:15 -- 10:25通多电话的人
+-- 根据线索查看10:15 -- 10:25通电话的人
 -- | Sofia   |
 -- | Kelsey  |
 -- | Bruce   |
