@@ -27,7 +27,8 @@ JOIN bakery_security_logs
     ON people.license_plate = bakery_security_logs.license_plate
 JOIN bank_accounts
     ON people.id = bank_accounts.person_id
-JOIN 
+JOIN atm_transactions
+    ON bank_accounts.account_number = atm_transactions.account_number
 WHERE bakery_security_logs.day = 28;
 
 SELECT * FROM atm_transactions ;
