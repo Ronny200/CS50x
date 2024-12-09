@@ -27,7 +27,7 @@ AND street = 'Humphrey Street' AND description LIKE '%thief%';
 --
 SELECT transcript FROM interviews
 WHERE year = 2023 AND month = 7 AND day = 28
-AND transcript LIKE '%brakery%';
+AND transcript LIKE '%thef%';
 
 -- 根据现场报告查看面包店的信息
 SELECT hour, minute, activity, license_plate FROM bakery_security_logs
