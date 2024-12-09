@@ -24,8 +24,10 @@ WHERE day = 28 AND hour > 9;
 -- 根据面包店纪录中的车牌寻找嫌疑人的信息
 SELECT name, phone_number,passport_number, bakery_security_logs.day  FROM people
 JOIN bakery_security_logs
-ON people.license_plate = bakery_security_logs.license_plate
-ON 
+    ON people.license_plate = bakery_security_logs.license_plate
+JOIN bank_accounts
+    ON people.id = bank_accounts.person_id
+JOIN 
 WHERE bakery_security_logs.day = 28;
 
 SELECT * FROM atm_transactions ;
