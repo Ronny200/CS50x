@@ -99,6 +99,8 @@ JOIN atm_transactions at ON at.account_number = ba.account_number
     AND at.atm_location = 'Leggett Street'
     AND at.transaction_type = 'withdraw';
 
+-- 确定小偷要去的城市
+
 
 
 
