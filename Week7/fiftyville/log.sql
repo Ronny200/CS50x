@@ -23,10 +23,14 @@ AND street = 'Humphrey Street';
 .scheme bakery_security_logs
 
 SELECT hour, minute, activity, license_plate FROM bakery_security_logs
-WHERE day = 28 AND 11 > hour > 10;
+WHERE day = 28 AND hour > 9 AND hour < 11 AND minute < 15;
 
 -- 根据面包店纪录中的车牌寻找嫌疑人的信息
-SELECT name, phone_number,  FROM people
+SELECT name, phone_number,passport_number  FROM people
 JOIN bakery_security_logs
-ON people.license_plate = bakery_security_logs.license_plate;
+ON people.license_plate = bakery_security_logs.license_plate
+WHERE bakery_security_logs.day = 28
+AND bakery_security_logs.hour < 11
+AND bakery_security_logs.hour > 10;
+;
 
