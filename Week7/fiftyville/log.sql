@@ -39,5 +39,12 @@ WHERE month = 7 AND day = 28 AND atm_location = 'Leggett Street'
 AND transaction_type = 'withdraw';
 
 -- 通过银行账号获取取钱人的名字，电话，车牌
-SELECT * FROM people
-JOIN 
+SELECT passport_number FROM people
+JOIN bank_accounts
+    ON people.id = bank_accounts.person_id
+JOIN atm_transactions
+    ON bank_accounts.account_number = atm_transactions.account_number
+WHERE
+    month = 7 AND day = 28
+    AND atm_location = 'Leggett Street'
+    AND transaction_type = 'withdraw';
