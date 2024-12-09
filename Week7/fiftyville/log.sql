@@ -29,8 +29,7 @@ WHERE day = 28 AND hour > 9 AND hour < 11 AND minute < 15;
 SELECT name, phone_number,passport_number  FROM people
 JOIN bakery_security_logs
 ON people.license_plate = bakery_security_logs.license_plate
-JOIN phone_calls
-ON phone_calls.receiver = people.phone_number
+
 WHERE bakery_security_logs.day = 28;
 
 SELECT * FROM phone_calls;
