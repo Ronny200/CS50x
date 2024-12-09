@@ -24,12 +24,16 @@ SELECT description FROM crime_scene_reports
 WHERE year = 2023 AND month = 7 AND day = 28
 AND street = 'Humphrey Street' AND description LIKE '%thief%';
 
---
+/** 根据采访记录可以判断：
+    1. 小偷在盗窃的10分钟内从面包店停车场上车也就是 10:15 -- 10:25阶段走的
+    2. 小偷在早上去银行提款机取过钱
+    3. 小偷在10:15 -- 10:25 阶段给同伙打过电话，计划7月29日坐飞机离开
+*/
 SELECT transcript FROM interviews
 WHERE year = 2023 AND month = 7 AND day = 28
-AND transcript LIKE '%thef%';
+AND transcript LIKE '%thief%';
 
--- 根据现场报告查看面包店的信息
+-- 根据线索查看面包店10:15 -- 10:25之间离开的人
 SELECT hour, minute, activity, license_plate FROM bakery_security_logs
 WHERE day = 28 AND hour > 9;
 
