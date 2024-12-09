@@ -86,7 +86,7 @@ WHERE airports.city = 'Fiftyville' and flights.day = 29
 ORDER BY hour, minute limit 1;
 
 -- 根据所有线索先追踪小偷.
-| Bruce |
+-- | Bruce |
 SELECT DISTINCT p.name FROM people p
 JOIN passengers ps ON p.passport_number = ps.passport_number AND ps.flight_id = 36
 JOIn phone_calls pc ON pc.caller = p.phone_number AND pc.day = 28 AND pc.duration < 60
@@ -100,7 +100,11 @@ JOIN atm_transactions at ON at.account_number = ba.account_number
     AND at.transaction_type = 'withdraw';
 
 -- 确定小偷要去的城市
-
+SELECT a.city FROM airports a
+JOIN flights f ON f.destination_airport_id = a.id
+JOIN passengers pe ON pe.flight_id = f.destination_airport_id
+JOIN people p ON p.passport_number = pe.passport_number
+WHERE p.name = 'Bruce';
 
 
 
