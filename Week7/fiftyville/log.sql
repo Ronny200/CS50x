@@ -34,7 +34,7 @@ AND transcript LIKE '%thief%';
 -- | Luca    |
 -- | Sofia   |
 -- | Vanessa |
-SELECT name FROM people
+SELECT DISTINCT name FROM people
 JOIN bakery_security_logs
     ON bakery_security_logs.license_plate = people.license_plate
 WHERE day = 28 AND hour > 9 and minute > 14 and hour < 11 and minute < 26
@@ -42,18 +42,18 @@ ORDER BY name;
 
 
 -- 根据线索查看10:15 -- 10:25通电话的人
--- | Sofia   |
--- | Kelsey  |
--- | Bruce   |
--- | Kelsey  |
--- | Taylor  |
--- | Diana   |
--- | Carina  |
--- | Kenny   |
 -- | Benista |
-SELECT name FROM people
+-- | Bruce   |
+-- | Carina  |
+-- | Diana   |
+-- | Kelsey  |
+-- | Kenny   |
+-- | Sofia   |
+-- | Taylor  |
+SELECT DISTINCT name FROM people
 JOIN phone_calls ON people.phone_number = phone_calls.caller
-WHERE month = 7 AND day = 28 AND duration < 60;
+WHERE month = 7 AND day = 28 AND duration < 60
+ORDER BY name;
 
 -- 根据线索查看28号早上取过钱的人
 SELECT * FROM atm_transactions
