@@ -41,14 +41,4 @@ WHERE day = 28 AND hour > 9 and minute > 14 and hour < 11 and minute < 26;
 SELECT hour, minute, activity, license_plate FROM bakery_security_logs
 WHERE day = 28 AND hour > 9 and minute > 14 and hour < 11 and minute < 26;
 
--- 根据面包店纪录中的车牌寻找嫌疑人的信息
-SELECT DISTINCT name, phone_number,passport_number, bakery_security_logs.day  FROM people
-JOIN bakery_security_logs
-    ON people.license_plate = bakery_security_logs.license_plate
-JOIN bank_accounts
-    ON people.id = bank_accounts.person_id
-JOIN atm_transactions
-    ON bank_accounts.account_number = atm_transactions.account_number
-WHERE bakery_security_logs.day = 28;
 
-SELECT * FROM atm_transactions ;
