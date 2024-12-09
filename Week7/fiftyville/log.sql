@@ -47,6 +47,11 @@ JOIN phone_calls ON people.phone_number = phone_calls.caller
 WHERE month = 7 AND day = 28 AND duration < 60
 ORDER BY name;
 
+SELECT DISTINCT name FROM people
+JOIN phone_calls ON people.phone_number = phone_calls.receiver
+WHERE month = 7 AND day = 28 AND duration < 60
+ORDER BY name;
+
 -- 通过银行账号获取取钱人的信息
 -- | Benista |
 -- | Brooke  |
@@ -100,7 +105,8 @@ WHERE p.name = 'Bruce';
 -- 小偷的同伙为和小偷通话的人
 | Robin |
 SELECT p.name FROM people p
-JOIN phone_calls pc ON p.phone_number = pc.receiver AND month = 7 AND day = 28 AND duration < 60
+JOIN phone_calls pc ON p.phone_number = pc.receiver
+    AND month = 7 AND day = 28 AND duration < 60
 JOIN people p2 ON p2.phone_number = pc.caller
 WHERE p2.name = 'Bruce';
 
