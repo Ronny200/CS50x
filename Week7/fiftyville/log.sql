@@ -73,12 +73,11 @@ WHERE
 -- 根据所有线索先追踪小偷
 SELECT DISTINCT people.name, airports.city FROM people
 JOIN passengers
-    ON passengers.passport_number = people.passport_number
-JOIN airports
-    ON airports.id = flights.destination_airport_id
+    ON people.passport_number = passengers.passport_number
 JOIN flights
-    ON flights.id = passengers.flight_id
-
+    ON passengers.flight_id = flights.id
+JOIN airports
+    ON flights.destination_airport_id = airports.id
 JOIN bank_accounts
     ON people.id = bank_accounts.person_id
 JOIN atm_transactions
@@ -87,8 +86,6 @@ JOIN bakery_security_logs
     ON people.license_plate = bakery_security_logs.license_plate
 JOIN phone_calls
     ON people.phone_number = phone_calls.caller
-
-
 WHERE
     atm_transactions.month = 7
     AND atm_transactions.day = 28
@@ -98,5 +95,9 @@ WHERE
     AND phone_calls.day = 28
     AND bakery_security_logs.month = 7
     AND bakery_security_logs.day = 28
+    AND bakery_security_logs.hour > 9
+    AND bakery_security_logs.minute >14
+    AND bakery_security_logs.hour < 11
+    AND bakery_security_logs.minute < 26
     AND flights.month = 7
     AND flights.day = 29;
