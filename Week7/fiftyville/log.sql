@@ -90,8 +90,11 @@ SELECT DISTINCT p.name FROM people p
 JOIN passengers ps ON p.passport_number = ps.passport_number
 JOIN flights f ON f.id = ps.flight_id
 JOIN airports a ON a.id = f.origin_airport_id
-WHERE a.city = 'Fiftyville' and f.day = 29
-ORDER BY hour, minute;
+JOIn phone_calls p ON p.caller = p.phone_number
+WHERE a.city = 'Fiftyville'
+    AND f.day = 29
+    AND 
+;
 
 
 
