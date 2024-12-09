@@ -68,7 +68,11 @@ WHERE
     AND phone_calls.month = 7
     AND phone_calls.day = 28
     AND bakery_security_logs.month = 7
-    AND bakery_security_logs.day = 28;
+    AND bakery_security_logs.day = 28
+    AND bakery_security_logs.hour > 9
+    AND bakery_security_logs.minute >14
+    AND bakery_security_logs.hour < 11
+    AND bakery_security_logs.minute < 26;
 
 -- 根据所有线索先追踪小偷
 SELECT DISTINCT people.name, airports.city FROM people
