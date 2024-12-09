@@ -69,3 +69,26 @@ WHERE
     AND phone_calls.day = 28
     AND bakery_security_logs.month = 7
     AND bakery_security_logs.day = 28;
+
+-- 继续加入线索，7月29日离开的人
+SELECT DISTINCT people.name, people.passport_number FROM people
+JOIN bakery_security_logs
+    ON people.license_plate = bakery_security_logs.license_plate
+JOIN phone_calls
+    ON people.phone_number = phone_calls.caller
+JOIN bank_accounts
+    ON people.id = bank_accounts.person_id
+JOIN atm_transactions
+    ON bank_accounts.account_number = atm_transactions.account_number
+JOIN 
+JOIN passengers
+    ON people.passport_number = passengers.passport_number
+WHERE
+    atm_transactions.month = 7
+    AND atm_transactions.day = 28
+    AND atm_location = 'Leggett Street'
+    AND transaction_type = 'withdraw'
+    AND phone_calls.month = 7
+    AND phone_calls.day = 28
+    AND bakery_security_logs.month = 7
+    AND bakery_security_logs.day = 28;
