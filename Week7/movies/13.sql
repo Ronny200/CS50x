@@ -1,8 +1,4 @@
-SELECT name FROM people WHERE(
-    SELECT person_id FROM stars WHERE
-    (
-        SELECT person_id FR
-    )
-)
-
+SELECT person_id FROM stars WHERE
+(SELECT id FROM people
+WHERE name = 'Kevin Bacon' AND birth = 1958;)
 
