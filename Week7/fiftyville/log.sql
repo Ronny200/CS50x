@@ -106,7 +106,7 @@ WHERE
 --     AND flights.month = 7
 --     AND flights.day = 29;
 
-SELECT DISTINCT people.name, airports.city FROM people
+SELECT DISTINCT people.name FROM people
 WHERE people.id IN
 (
     SELECT DISTINCT people.id FROM people
@@ -116,8 +116,9 @@ WHERE people.id IN
         ON passengers.flight_id = flights.id
     JOIN airports
         ON flights.destination_airport_id = airports.id
-
+    WHERE flights.month = 7 AND flights.day = 29
 )
+
 
 
 JOIN bank_accounts
@@ -141,5 +142,4 @@ WHERE
     AND bakery_security_logs.minute >14
     AND bakery_security_logs.hour < 11
     AND bakery_security_logs.minute < 26
-    AND flights.month = 7
-    AND flights.day = 29;
+
