@@ -72,6 +72,11 @@ WHERE
 
 -- 继续加入线索，7月29日离开的人
 SELECT DISTINCT people.name, people.passport_number FROM people
+JOIN flights
+    ON flights.id = passengers.flight_id
+JOIN passengers
+    ON people.passport_number = passengers.passport_number
+
 JOIN bakery_security_logs
     ON people.license_plate = bakery_security_logs.license_plate
 JOIN phone_calls
@@ -80,9 +85,7 @@ JOIN bank_accounts
     ON people.id = bank_accounts.person_id
 JOIN atm_transactions
     ON bank_accounts.account_number = atm_transactions.account_number
-JOIN 
-JOIN passengers
-    ON people.passport_number = passengers.passport_number
+
 WHERE
     atm_transactions.month = 7
     AND atm_transactions.day = 28
