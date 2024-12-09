@@ -25,9 +25,9 @@ WHERE year = 2023 AND month = 7 AND day = 28
 AND street = 'Humphrey Street' AND description LIKE '%CS50 duck%';
 
 --
-SELECT interviews FROM crime_scene_reports
+SELECT transcript FROM interviews
 WHERE year = 2023 AND month = 7 AND day = 28
-AND street = 'Humphrey Street' AND interviews LIKE '%duck%';
+AND transcript LIKE '%brakery%';
 
 -- 根据现场报告查看面包店的信息
 SELECT hour, minute, activity, license_plate FROM bakery_security_logs
