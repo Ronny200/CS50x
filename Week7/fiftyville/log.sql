@@ -118,7 +118,8 @@ WHERE
     AND bakery_security_logs.hour < 11
     AND bakery_security_logs.minute < 26
     AND flights.month = 7
-    AND flights.day = 29;
+    AND flights.day = 29
+    AND airports.city = 'Fiftyville';
 
 
 
