@@ -84,7 +84,6 @@ JOIN bank_accounts
     ON people.id = bank_accounts.person_id
 JOIN atm_transactions
     ON bank_accounts.account_number = atm_transactions.account_number
-JOIN people
 
 WHERE
     atm_transactions.month = 7
@@ -94,4 +93,5 @@ WHERE
     AND phone_calls.month = 7
     AND phone_calls.day = 28
     AND bakery_security_logs.month = 7
-    AND bakery_security_logs.day = 28;
+    AND bakery_security_logs.day = 28
+    AND ;
