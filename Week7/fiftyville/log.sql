@@ -35,9 +35,11 @@ AND transcript LIKE '%thief%';
 -- | Sofia   |
 -- | Vanessa |
 SELECT DISTINCT name FROM people
-JOIN bakery_security_logs
-    ON bakery_security_logs.license_plate = people.license_plate
-WHERE day = 28 AND hour = 10 AND minute > 15 AND minute < 25 AND 
+JOIN bakery_security_logs bsl
+    ON bsl.license_plate = people.license_plate
+WHERE month = 7 AND day = 28
+    AND hour = 10 AND minute > 15 AND minute < 25
+    AND activity = 'exit'
 ORDER BY name;
 
 
