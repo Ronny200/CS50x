@@ -38,7 +38,7 @@ SELECT hour, minute, activity, license_plate FROM bakery_security_logs
 WHERE day = 28 AND hour > 9 and minute > 14 and hour < 11 and minute < 26;
 
 -- 根据线索查看10:15 -- 10:25通多电话的人
-SELECT hour, minute, activity, license_plate FROM bakery_security_logs
-WHERE day = 28 AND hour > 9 and minute > 14 and hour < 11 and minute < 26;
+SELECT caller FROM phone_calls
+WHERE month = 7 AND day = 28;
 
 
