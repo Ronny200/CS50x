@@ -11,3 +11,6 @@ SELECT COUNT(name) FROM people WHERE ID IN
     )
 ) AND name != 'Kevin Bacon';
 
+SELECT name FROM people
+JOIN stars ON people.id = stars.person_id
+WHERE stars.movie_id
