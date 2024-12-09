@@ -11,7 +11,7 @@
 -- bank_accounts         -- 银行账户
 -- passengers            -- 乘客
 
--- 查看2023年7月28日Humphrey街的犯罪记录获知鸭子被盗时间为10:15
+-- 查看2023年7月28日Humphrey street的犯罪记录获知鸭子被盗时间为10:15
 SELECT description FROM crime_scene_reports
 WHERE year = 2023 AND month = 7 AND day = 28
 AND street = 'Humphrey Street' AND description LIKE '%thief%';
@@ -34,5 +34,8 @@ SELECT caller FROM phone_calls
 WHERE month = 7 AND day = 28;
 
 -- 根据线索查看28号早上取过钱的人
+SELECT * FROM atm_transactions
+WHERE month = 7 AND day = 28 AND atm_location = 'humphrey street'
+AND transaction_type = 'withdraw';
 
 
