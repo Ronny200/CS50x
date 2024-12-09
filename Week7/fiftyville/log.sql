@@ -79,9 +79,10 @@ WHERE
 ORDER BY name;
 
 -- 29日最早的从cs50起飞的航班
+-- | 36 |
 SELECT flights.id FROM flights
 JOIN airports ON flights.origin_airport_id = airports.id
-WHERE airports.city = 'Fiftyville'
+WHERE airports.city = 'Fiftyville' and flights.day = 29
 ORDER BY hour, minute limit 1;
 
 根据所有线索先追踪小偷
