@@ -100,13 +100,16 @@ JOIN atm_transactions at ON at.account_number = ba.account_number
     AND at.transaction_type = 'withdraw';
 
 -- 确定小偷要去的城市
+-- | New York City |
 SELECT a.city FROM airports a
 JOIN flights f ON f.destination_airport_id = a.id
 JOIN passengers pe ON pe.flight_id = f.id
 JOIN people p ON p.passport_number = pe.passport_number
 WHERE p.name = 'Bruce';
 
-
+-- 小偷的同伙为和小偷通话的人
+SELECT name FROM people p
+JOIN 
 
 
 
