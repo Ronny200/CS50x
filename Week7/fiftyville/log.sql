@@ -24,5 +24,5 @@ CREATE TABLE bakery_security_logs (
     license_plate TEXT,
     PRIMARY KEY(id)
 );
-SELECT activity FROM bakery_security_logs
-WHERE hour = 10 AND minute = 14;
+SELECT * FROM bakery_security_logs
+WHERE day = 28 AND hour < 11;
