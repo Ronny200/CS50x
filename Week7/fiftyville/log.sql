@@ -72,12 +72,12 @@ WHERE
 
 -- 继续加入线索，7月29日离开的人
 SELECT DISTINCT people.name, airports.city FROM people
-JOIN airports
-    ON airports.id = flights.destination_airport_id
-JOIN flights
-    ON flights.id = passengers.flight_id
 JOIN passengers
-    ON passengers.passport_number = people.passport_number
+    ON people.passport_number = passengers.passport_number
+JOIN flights
+    ON passengers.flight_id = flights.id
+JOIN airports
+    ON flights.destination_airport_id = airports.id
 JOIN bakery_security_logs
     ON people.license_plate = bakery_security_logs.license_plate
 JOIN phone_calls
