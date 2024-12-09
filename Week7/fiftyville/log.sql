@@ -19,7 +19,7 @@ AND street = 'Humphrey Street' AND description LIKE '%CS50%';
 /** 根据采访记录可以判断：
     1. 小偷在盗窃的10分钟内从面包店停车场上车也就是 28 日 10:15 -- 10:25 阶段走的
     2. 小偷在28日早上去Leggett Street街道的银行提款机取过钱
-    3. 小偷在10:15 -- 10:25 阶段给同伙打过电话，让同伙买7月29日的机票坐飞机离开
+    3. 小偷在离开面包店的时候打了电话，通话时间不到一分钟。在电话中，我听到小偷说他们计划明天乘坐最早一班从 Fiftyville 出发的航班离开。然后小偷让电话另一端的人帮他们购买机票。
 */
 SELECT transcript FROM interviews
 WHERE year = 2023 AND month = 7 AND day = 28
@@ -110,6 +110,7 @@ WHERE
     AND transaction_type = 'withdraw'
     AND phone_calls.month = 7
     AND phone_calls.day = 28
+    AND phone_calls.duration < 60
     AND bakery_security_logs.month = 7
     AND bakery_security_logs.day = 28
     AND bakery_security_logs.hour > 9
