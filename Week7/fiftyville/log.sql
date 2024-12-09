@@ -85,7 +85,8 @@ JOIN airports ON flights.origin_airport_id = airports.id
 WHERE airports.city = 'Fiftyville' and flights.day = 29
 ORDER BY hour, minute limit 1;
 
-根据所有线索先追踪小偷
+-- 根据所有线索先追踪小偷.
+| Bruce |
 SELECT DISTINCT p.name FROM people p
 JOIN passengers ps ON p.passport_number = ps.passport_number AND ps.flight_id = 36
 JOIn phone_calls pc ON pc.caller = p.phone_number AND pc.day = 28 AND pc.duration < 60
@@ -96,8 +97,7 @@ JOIN bank_accounts ba ON ba.person_id = p.id
 JOIN atm_transactions at ON at.account_number = ba.account_number
     AND at.month = 7 AND at.day = 28
     AND at.atm_location = 'Leggett Street'
-    AND at.transaction_type = 'withdraw'
-;
+    AND at.transaction_type = 'withdraw';
 
 
 
