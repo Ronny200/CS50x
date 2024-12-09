@@ -25,6 +25,7 @@ WHERE day = 28 AND hour > 9;
 SELECT name, phone_number,passport_number, bakery_security_logs.day  FROM people
 JOIN bakery_security_logs
 ON people.license_plate = bakery_security_logs.license_plate
+ON 
 WHERE bakery_security_logs.day = 28;
 
 SELECT * FROM atm_transactions ;
