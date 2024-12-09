@@ -74,7 +74,6 @@ WHERE
 SELECT DISTINCT people.name, airports.city FROM people
 JOIN passengers
     ON passengers.passport_number = people.passport_number
-    
 JOIN airports
     ON airports.id = flights.destination_airport_id
 JOIN flights
