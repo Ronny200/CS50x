@@ -86,38 +86,8 @@ WHERE airports.city = 'Fiftyville' and flights.day = 29
 ORDER BY hour, minute limit 1;
 
 根据所有线索先追踪小偷
-SELECT DISTINCT people.name, airports.city FROM people
-JOIN passengers
-    ON people.passport_number = passengers.passport_number
-JOIN flights
-    ON passengers.flight_id = flights.id
-JOIN airports
-    ON flights.destination_airport_id = airports.id
-JOIN bank_accounts
-    ON people.id = bank_accounts.person_id
-JOIN atm_transactions
-    ON bank_accounts.account_number = atm_transactions.account_number
-JOIN bakery_security_logs
-    ON people.license_plate = bakery_security_logs.license_plate
-JOIN phone_calls
-    ON people.phone_number = phone_calls.caller
-WHERE
-    atm_transactions.month = 7
-    AND atm_transactions.day = 28
-    AND atm_location = 'Leggett Street'
-    AND transaction_type = 'withdraw'
-    AND phone_calls.month = 7
-    AND phone_calls.day = 28
-    AND phone_calls.duration < 60
-    AND bakery_security_logs.month = 7
-    AND bakery_security_logs.day = 28
-    AND bakery_security_logs.hour > 9
-    AND bakery_security_logs.minute >14
-    AND bakery_security_logs.hour < 11
-    AND bakery_security_logs.minute < 26
-    AND flights.month = 7
-    AND flights.day = 29
-    AND airports.id = 8;
+SELECT DISTINCT p.name FROM people p
+
 
 
 
