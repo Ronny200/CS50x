@@ -108,13 +108,10 @@ JOIN people p ON p.passport_number = pe.passport_number
 WHERE p.name = 'Bruce';
 
 -- 小偷的同伙为和小偷通话的人
-SELECT name FROM people p
-JOIN phone_calls pc ON p.phone_number = pc.receiver
-    WHERE month = 7 AND day = 28 AND duration < 60
-JOIN people p2 ON p2.phone_number = pc.call
+| Robin |
+SELECT p.name FROM people p
+JOIN phone_calls pc ON p.phone_number = pc.receiver AND month = 7 AND day = 28 AND duration < 60
+JOIN people p2 ON p2.phone_number = pc.caller
 WHERE p2.name = 'Bruce';
-
-
-
 
 
