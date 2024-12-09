@@ -35,7 +35,7 @@ AND transcript LIKE '%thief%';
 
 -- 根据线索查看面包店10:15 -- 10:25之间离开的人
 SELECT hour, minute, activity, license_plate FROM bakery_security_logs
-WHERE day = 28 AND hour > 9;
+WHERE day = 28 AND hour > 9 and minute > 14 and hour < 11 and minute < 26;
 
 -- 根据面包店纪录中的车牌寻找嫌疑人的信息
 SELECT DISTINCT name, phone_number,passport_number, bakery_security_logs.day  FROM people
