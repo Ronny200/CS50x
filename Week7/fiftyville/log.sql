@@ -27,4 +27,4 @@ JOIN bakery_security_logs
 ON people.license_plate = bakery_security_logs.license_plate
 WHERE bakery_security_logs.day = 28;
 
-SELECT * FROM phone_calls;
+SELECT * FROM atm_transactions ;
