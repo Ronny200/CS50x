@@ -12,18 +12,14 @@
 -- passengers            -- 乘客
 
 -- 根据结构查看2023年7月28日Humphrey街的记录
-.schema crime_scene_reports
-
 SELECT description FROM crime_scene_reports
 WHERE year = 2023 AND month = 7 AND day = 28
 AND street = 'Humphrey Street';
 
 
--- 根据现场报告查看面包店的结构和信息
-.scheme bakery_security_logs
-
+-- 根据现场报告查看面包店的信息
 SELECT hour, minute, activity, license_plate FROM bakery_security_logs
-WHERE day = 28 AND hour > 9 AND hour < 11 AND minute < 15;
+WHERE day = 28 AND hour > 9;
 
 -- 根据面包店纪录中的车牌寻找嫌疑人的信息
 SELECT name, phone_number,passport_number  FROM people
