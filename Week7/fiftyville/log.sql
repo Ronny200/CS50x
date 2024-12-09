@@ -72,12 +72,14 @@ WHERE
 
 -- 根据所有线索先追踪小偷
 SELECT DISTINCT people.name, airports.city FROM people
+JOIN passengers
+    ON passengers.passport_number = people.passport_number
+    
 JOIN airports
     ON airports.id = flights.destination_airport_id
 JOIN flights
     ON flights.id = passengers.flight_id
-JOIN passengers
-    ON passengers.passport_number = people.passport_number
+
 JOIN bank_accounts
     ON people.id = bank_accounts.person_id
 JOIN atm_transactions
