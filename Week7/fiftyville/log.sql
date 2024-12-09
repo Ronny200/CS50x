@@ -55,13 +55,16 @@ JOIN phone_calls ON people.phone_number = phone_calls.caller
 WHERE month = 7 AND day = 28 AND duration < 60
 ORDER BY name;
 
--- 根据线索查看28号早上取过钱的人
-SELECT * FROM atm_transactions
-WHERE month = 7 AND day = 28 AND atm_location = 'Leggett Street'
-AND transaction_type = 'withdraw';
-
 -- 通过银行账号获取取钱人的信息
-SELECT people.name, passport_number, phone_number, license_plate FROM people
+-- | Benista |
+-- | Brooke  |
+-- | Bruce   |
+-- | Diana   |
+-- | Iman    |
+-- | Kenny   |
+-- | Luca    |
+-- | Taylor  |
+SELECT DISTINCT name FROM people
 JOIN bank_accounts
     ON people.id = bank_accounts.person_id
 JOIN atm_transactions
@@ -70,7 +73,8 @@ WHERE
     atm_transactions.month = 7
     AND atm_transactions.day = 28
     AND atm_transactions.atm_location = 'Leggett Street'
-    AND atm_transactions.transaction_type = 'withdraw';
+    AND atm_transactions.transaction_type = 'withdraw'
+ORDER BY name;
 
 -- 通过上面线索进行过滤
 SELECT DISTINCT people.name, people.passport_number FROM people
