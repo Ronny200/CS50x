@@ -87,9 +87,7 @@ ORDER BY hour, minute limit 1;
 
 根据所有线索先追踪小偷
 SELECT DISTINCT p.name FROM people p
-JOIN passengers ps ON p.passport_number = ps.passport_number
-JOIN flights f ON f.id = ps.flight_id AND f.day = 29
-JOIN airports a ON a.id = f.origin_airport_id AND a.city = 'Fiftyville'
+JOIN passengers ps ON p.passport_number = ps.passport_number AND ps.flight_id = 36
 JOIn phone_calls pc ON pc.caller = p.phone_number AND pc.day = 28 AND pc.duration < 60
 JOIN bakery_security_logs bsl ON bsl.license_plate = p.license_plate
     AND bsl.activity = 'exit' AND bsl.day = 28
