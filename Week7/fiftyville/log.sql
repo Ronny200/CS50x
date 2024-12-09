@@ -1,5 +1,16 @@
 -- Keep a log of any SQL queries you execute as you solve the mystery.
 
+-- airports              -- 机场
+-- crime_scene_reports   -- 犯罪现场报告
+-- people                -- 人员
+-- atm_transactions      -- 自动取款机交易
+-- flights               -- 航班
+-- phone_calls           -- 电话
+-- bakery_security_logs  -- 面包店安全日志
+-- interviews            -- 采访
+-- bank_accounts         -- 银行账户
+-- passengers            -- 乘客
+
 -- 根据结构查看2023年7月28日Humphrey街的记录
 .schema crime_scene_reports
 
