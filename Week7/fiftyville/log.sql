@@ -26,10 +26,21 @@ WHERE year = 2023 AND month = 7 AND day = 28
 AND transcript LIKE '%thief%';
 
 -- 根据线索查看面包店10:15 -- 10:25之间离开的人
+-- | Barry   |
+-- | Bruce   |
+-- | Diana   |
+-- | Iman    |
+-- | Kelsey  |
+-- | Luca    |
+-- | Sofia   |
+-- | Vanessa |
+-- +---------+
 SELECT name FROM people
 JOIN bakery_security_logs
     ON bakery_security_logs.license_plate = people.license_plate
-WHERE day = 28 AND hour > 9 and minute > 14 and hour < 11 and minute < 26;
+WHERE day = 28 AND hour > 9 and minute > 14 and hour < 11 and minute < 26
+ORDER BY name;
+
 
 -- 根据线索查看10:15 -- 10:25通多电话的人
 SELECT caller FROM phone_calls
