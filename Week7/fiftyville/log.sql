@@ -70,7 +70,7 @@ WHERE
     AND bakery_security_logs.month = 7
     AND bakery_security_logs.day = 28;
 
--- 继续加入线索，7月29日离开的人
+-- 根据所有线索先追踪小偷
 SELECT DISTINCT people.name, airports.city FROM people
 JOIN passengers
     ON people.passport_number = passengers.passport_number
