@@ -14,13 +14,13 @@
                 document.querySelector('#answ').innerHTML = 'Correct!';
               });
 
-              let incorrect = document.querySelectorALL('.incorrect');
-              for (let i = 0; i < incorrect.lenght; i++)
+              let incorrect = document.querySelectorAll('.incorrect');
+              for (let i = 0; i < incorrect.length; i++)
               {
                 incorrect[i].addEventListener('click', function()
               {
-                incorrect.style.backgroundColor = 'red';
-                document.querySelector('#answ').innerHTML = 'Correct!';
+                incorrect[i].style.backgroundColor = 'red';
+                document.querySelector('#answ').innerHTML = 'InCorrect!';
               });
               }
             });
