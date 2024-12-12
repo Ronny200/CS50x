@@ -7,21 +7,22 @@
         <title>Trivia!</title>
         <script>
             // TODO: Add code to check answers to questions
-            let correct = document.querySelector('.correct');
+            Document.addEventListener('DOMContentLoaded', function(){
+              
+                let correct = document.querySelector('.correct');
                 correct.addEventListener('click', function(){
                     correct.style.backgroundColor = 'green';
                     document.querySelector('#answ').innerHTML = 'correct!';
-              });
-            });
+                  });
 
-            Document.addEventListener('DOMContentLoaded', function(){
                 let incorrect = document.querySelectorALL('.incorrect');
                 for (let i = 0; i < incorrects.length; i++){
                   incorrects[i].addEventListener('click', function(){
                     incorrect[i].style.backgroundColor = 'red';
                     document.querySelector('#answ').innerHTML = 'Incorrect!';
                   });
-                }
+
+            });
 
         </script>
     </head>
