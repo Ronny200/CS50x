@@ -9,7 +9,7 @@
             // TODO: Add code to check answers to questions
             Document.addEventListener('DOMContentLoaded', function(){
               let err = document.querySelector('.err');
-              b.addEventListener('click', function(){
+              err.addEventListener('click', function(){
                 err.style.backgroundColor = 'red';
                 document.querySelector('#answ').innerHTML = 'error';
               });
