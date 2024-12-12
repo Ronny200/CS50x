@@ -8,10 +8,19 @@
         <script>
             // TODO: Add code to check answers to questions
             Document.addEventListener('DOMContentLoaded', function(){
-              let true = document.querySelector('.true');
-              true.addEventListener('click', function(){
-                true.style.backgroundColor = 'green';
-                document.querySelector('#answ').innerHTML = 'true';
+                let incorrect = document.querySelectorALL('.incorrect');
+                for (let i = 0; i < incorrects.length; i++){
+                  incorrects[i].addEventListener('click', function(){
+                    incorrect[i].style.backgroundColor = 'red';
+                    document.querySelector('#answ').innerHTML = 'Incorrect!';
+                  });
+                }
+
+
+                let correct = document.querySelector('.correct');
+                correct.addEventListener('click', function(){
+                    correct.style.backgroundColor = 'green';
+                    document.querySelector('#answ').innerHTML = 'correct!';
               });
             });
         </script>
@@ -26,10 +35,10 @@
                 <h2>Part 1: Multiple Choice </h2>
                 <hr>
                 <h3>What is port numbers used to denote HTTPS?</h3>
-                <button class="err">80</button>
-                <button class="true">443</button>
-                <button class="err">8080</button>
-                <button class="err">88</button>
+                <button class="incorrect">80</button>
+                <button class="correct">443</button>
+                <button class="incorrect">8080</button>
+                <button class="incorrect">88</button>
                 <p id="answ"></p>
 
                 <!-- TODO: Add multiple choice question here -->
