@@ -29,10 +29,12 @@
               check.addEventListener('click', function(){
                 if (input.value == "yes")
                 {
-                  document.querySelector('#checkAnsw').innerHTML = input.value;
+                  input.style.backgroundColor = 'green';
+                  document.querySelector('#checkAnsw').innerHTML = 'Correct!';
                 }else
                 {
-                  document.querySelector('#checkAnsw').innerHTML = input.value;
+                  input.style.backgroundColor = 'red';
+                  document.querySelector('#checkAnsw').innerHTML = 'Incorrect!';
                 }
 
 
@@ -65,7 +67,7 @@
                 <hr>
                 <!-- TODO: Add free response question here -->
                 <h3>Do you feel happy while learning cs50?</h3>
-                <input autocomplete="off" autofocus placeholder="anser" type="text">
+                <input autocomplete="off" autofocus placeholder="answer" type="text">
                 <button class="check">Check Answer</button>
                 <p id="checkAnsw"></p>
 
