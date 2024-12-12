@@ -18,30 +18,28 @@
                 let incorrect = document.querySelectorAll('.incorrect');
                 for (let i = 0; i < incorrect.length; i++) {
                     incorrect[i].addEventListener('click', function() {
-                    incorrect[i].style.backgroundColor = 'red';
-                    document.querySelector('#answ').innerHTML = 'Incorrect!';
-              });
-              }
-
-              let check = document.querySelector('.check');
-              let input = document.querySelector('input');
-              check.addEventListener('click', function(){
-                if (input.value == "dns")
-                {
-                  input.style.backgroundColor = 'green';
-                  document.querySelector('#checkAnsw').innerHTML = 'Correct!';
-                }else
-                {
-                  input.style.backgroundColor = 'red';
-                  document.querySelector('#checkAnsw').innerHTML = 'Incorrect!';
+                        incorrect[i].style.backgroundColor = 'red';
+                        document.querySelector('#answ').innerHTML = 'Incorrect!';
+                    });
                 }
 
+                let check = document.querySelector('.check');
+                let input = document.querySelector('input');
+                check.addEventListener('click', function() {
+                    if (input.value == "dns") {
+                        input.style.backgroundColor = 'green';
+                        document.querySelector('#checkAnsw').innerHTML = 'Correct!';
+                    } else {
+                        input.style.backgroundColor = 'red';
+                        document.querySelector('#checkAnsw').innerHTML = 'Incorrect!';
+                    }
 
-              });
+
+                });
             });
-
         </script>
     </head>
+
     <body>
         <div class="header">
             <h1>Trivia!</h1>
@@ -73,4 +71,5 @@
             </div>
         </div>
     </body>
+
 </html>
