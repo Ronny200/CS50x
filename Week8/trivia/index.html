@@ -25,13 +25,14 @@
               }
 
               let check = document.querySelector('.check');
+              let input = document.querySelector('input');
               check.addEventListener('click', function(){
                 if (input.value == "yes")
                 {
-                  document.querySelector('#checkAnsw').innerHTML = 'Correct!';
+                  document.querySelector('#checkAnsw').innerHTML = input.value;
                 }else
                 {
-                  document.querySelector('#checkAnsw').innerHTML = 'Incorrect!';
+                  document.querySelector('#checkAnsw').innerHTML = input.value;
                 }
 
 
