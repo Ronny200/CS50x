@@ -1,7 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>search</head>
+  <head>
+    <title>Trivia!</title>
+    <script>
+      // TODO: Add code to check answers to questions
+      Document.addEventListener('DOMContentLoaded', function(){
+        let correct = document.querySelector('click');
+        correct.addEventListener('click', function(){
+          correct.style.backgroundColor = 'green';
+          document.querySelector('#answ').innerHTML = 'Correct!';
+        });
+
+      });
+  </head>
   <body>
-    <button>hello</button>
+    <button class="correct"> hello </button>
   </body>
 </html>
