@@ -24,7 +24,18 @@
               });
               }
 
-              let incorrect = document.querySelector('.input');
+              let check = document.querySelector('.check');
+              check.addEventListener('click', function(){
+                if (input.value == "yes")
+                {
+                  document.querySelector('#checkAnsw').innerHTML = 'Correct!';
+                }else
+                {
+                  document.querySelector('#checkAnsw').innerHTML = 'Incorrect!';
+                }
+
+
+              });
             });
 
         </script>
@@ -55,7 +66,8 @@
                 <h3>Do you feel happy while learning cs50?</h3>
                 <input autocomplete="off" autofocus placeholder="anser" type="text">
                 <button class="check">Check Answer</button>
-                
+                <p id="checkAnsw"></p>
+
             </div>
         </div>
     </body>
