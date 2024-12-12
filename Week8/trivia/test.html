@@ -5,16 +5,18 @@
     <script>
       // TODO: Add code to check answers to questions
       document.addEventListener('DOMContentLoaded', function(){
-        let correct = document.querySelector('.click');
-        correct.addEventListener('click', function(){
-          correct.style.backgroundColor = 'green';
-          document.querySelector('#answ').innerHTML = 'Correct!';
-        });
-
+        let correct = document.querySelector('.correct');
+        if(correct){
+          correct.addEventListener('click', function(){
+            correct.style.backgroundColor = 'green';
+            document.querySelector('#answ').innerHTML = 'Correct!';
+          });
+        }
       });
       </script>
   </head>
   <body>
     <button class="correct"> hello </button>
+    <p id="answ"></p>
   </body>
 </html>
