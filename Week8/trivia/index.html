@@ -15,8 +15,14 @@
               });
 
               let incorrect = document.querySelectorALL('.incorrect');
-              for (i)
-
+              for (let i = 0; i < incorrect.lenght; i++)
+              {
+                incorrect[i].addEventListener('click', function()
+              {
+                incorrect.style.backgroundColor = 'red';
+                document.querySelector('#answ').innerHTML = 'Incorrect!';
+              });
+              };
             });
 
         </script>
