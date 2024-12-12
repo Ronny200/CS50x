@@ -10,6 +10,7 @@
             let err = document.querySelector('.err');
             err.addEventListener('click', function(){
               err.sytle.backgroundColor = 'red';
+              document.querySelector('#answ').innerHTML = 'error';
             });
         </script>
     </head>
@@ -27,7 +28,7 @@
                 <button class="true">443</button>
                 <button class="err">8080</button>
                 <button class="err">88</button>
-                <p id="anse"></p>
+                <p id="answ"></p>
 
                 <!-- TODO: Add multiple choice question here -->
             </div>
