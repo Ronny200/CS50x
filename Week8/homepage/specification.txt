@@ -1,1 +1,6 @@
-html tags:
+html tags: meta, link, div, nav, footer, script, img, a, p, br, h2, h3
+
+CSS properties: border, margin, padding, width, height, text-align, font-size, color, text-decoration
+
+js: Use js to dynamically load div content
+bootstrap: Use bootstrap grid adaptive screen for a better browsing experience
