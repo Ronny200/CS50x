@@ -49,3 +49,8 @@ h2, h3 {
   color: black;
 }
 
+@media (max-width: 576px) {
+  .row.justify-content-center-xs {
+    justify-content: center;
+  }
+}
