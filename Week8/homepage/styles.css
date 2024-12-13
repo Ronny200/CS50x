@@ -41,14 +41,11 @@ h2, h3 {
   color: blue;
 }
 
-a {
+.side a {
   text-decoration: none;
 }
 
-a:link {
+.side .nav-link, a:link {
   color: black;
 }
 
-.nav-link {
-  color: black;
-}
