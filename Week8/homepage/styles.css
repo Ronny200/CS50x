@@ -54,3 +54,12 @@ h2, h3 {
     justify-content: center;
   }
 }
+
+.foot nav {
+  display: flex;
+  justify-content: center; /* 链接居中 */
+}
+
+.foot .nav-link {
+  margin: 0 1rem; /* 给链接之间添加间距 */
+}
