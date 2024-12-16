@@ -39,7 +39,10 @@
                         <!-- TODO: Loop through the database entries to display them in this table -->
                          {% block body %}
                             {% for people in peoples %}
-                                
+                                <tr>
+                                    <td>{{people.name}}</td>
+                                    <td>{{people.month}}/{{people.day}}</td>
+                                </tr>
                             {% endfor %}
 
                          {% endblock %}
