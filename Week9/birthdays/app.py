@@ -3,13 +3,13 @@ import os
 from cs50 import SQL
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 
+
 # Configure application
 app = Flask(__name__)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesytem"
+
 
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///birthdays.db")
@@ -35,7 +35,7 @@ def index():
     else:
 
         # TODO: Display the entries in the database on index.html
-        people = db.excute("SELECT ")
+        people = db.excute("SELECT * FROM birthday")
 
         return render_template("index.html")
 
