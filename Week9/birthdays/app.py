@@ -33,7 +33,7 @@ def index():
         month = request.form.get("month")
         day = request.form.get("day")
         if not name or not month or not day:
-            return render_template("failure.html")
+            return redirect("/failure.html")
         else:
             db.execute("INSERT INTO birthdays (name, month, day) VALUES(?, ?, ?)", name, month, day)
         return redirect("/")
