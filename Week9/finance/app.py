@@ -113,7 +113,10 @@ def quote():
 def register():
     """Register user"""
     session.clear()
-    
+    if request.method == "POST":
+        
+
+
     return apology("TODO")
 
 
