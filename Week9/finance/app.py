@@ -135,7 +135,7 @@ def register():
         try:
             db.execute("INSERT INTO users (username, hash) VALUES(?, ?)", name, passwd)
         except ValueError:
-
+            return apology("username taken", 400)
 
     else:
         return render_template("register.html")
