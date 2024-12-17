@@ -114,6 +114,8 @@ def register():
     """Register user"""
     session.clear()
     if request.method == "POST":
+
+        # 对表单开始检查
         if not request.form.get("username"):
             return apology("missing username", 400)
 
@@ -126,6 +128,9 @@ def register():
 
         elif request.form.get("password") != request.form.get("password_again"):
             return apology("passwords dont't match", 400)
+
+        # 将新用户添加到数据库
+        
 
     else:
         return render_template("register.html")
