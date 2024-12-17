@@ -133,7 +133,7 @@ def register():
         name = request.form.get("username")
         passwd = generate_password_hash(request.form.get("password"))
         try:
-            
+            db.execute("INSERT INTO users (name, sport) VALUES(?, ?)", name, sport)
 
     else:
         return render_template("register.html")
