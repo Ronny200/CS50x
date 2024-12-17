@@ -134,13 +134,12 @@ def register():
         passwd = generate_password_hash(request.form.get("password"))
         try:
             db.execute("INSERT INTO users (username, hash) VALUES(?, ?)", name, passwd)
+            return render_template("login.html")
         except ValueError:
             return apology("username taken", 400)
 
     else:
         return render_template("register.html")
-
-    return apology("TODO")
 
 
 @app.route("/sell", methods=["GET", "POST"])
