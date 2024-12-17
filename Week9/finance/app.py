@@ -131,7 +131,9 @@ def register():
 
         # 将新用户添加到数据库
         name = request.form.get("username")
-        passwd = request.form.get("password")
+        passwd = generate_password_hash(request.form.get("password"))
+        try:
+            
 
     else:
         return render_template("register.html")
