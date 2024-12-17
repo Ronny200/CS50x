@@ -134,6 +134,7 @@ def register():
         passwd = generate_password_hash(request.form.get("password"))
         try:
             db.execute("INSERT INTO users (username, hash) VALUES(?, ?)", name, passwd)
+            session["user_id"] = name
             return redirect("/")
         except ValueError:
             return apology("username taken", 400)
