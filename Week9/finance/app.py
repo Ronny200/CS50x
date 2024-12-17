@@ -130,7 +130,8 @@ def register():
             return apology("passwords dont't match", 400)
 
         # 将新用户添加到数据库
-        
+        name = request.form.get("username")
+        passwd = request.form.get("password")
 
     else:
         return render_template("register.html")
