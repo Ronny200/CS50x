@@ -115,17 +115,17 @@ def register():
     session.clear()
     if request.method == "POST":
         if not request.form.get("username"):
-            return apology("must provide username", 403)
+            return apology("missing username", 400)
 
         # Ensure password was submitted
         elif not request.form.get("password"):
-            return apology("must provide password", 403)
+            return apology("missing password", 400)
 
         elif not request.form.get("password_again"):
-            return apology("must provide password again", 403)
+            return apology("passwords dont't match", 400)
 
         elif request.form.get("password") != request.form.get("password_again"):
-            return apology("must provide password again", 403)
+            return apology("passwords dont't match", 400)
 
     else:
         return render_template("register.html")
