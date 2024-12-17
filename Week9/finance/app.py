@@ -123,10 +123,10 @@ def register():
         elif not request.form.get("password"):
             return apology("missing password", 400)
 
-        elif not request.form.get("password_again"):
+        elif not request.form.get("confirmation"):
             return apology("passwords dont't match", 400)
 
-        elif request.form.get("password") != request.form.get("password_again"):
+        elif request.form.get("password") != request.form.get("confirmation"):
             return apology("passwords dont't match", 400)
 
         # 将新用户添加到数据库
@@ -135,7 +135,7 @@ def register():
         try:
             db.execute("INSERT INTO users (username, hash) VALUES(?, ?)", name, passwd)
         except ValueError:
-            
+
 
     else:
         return render_template("register.html")
