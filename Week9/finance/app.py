@@ -121,6 +121,12 @@ def register():
         elif not request.form.get("password"):
             return apology("must provide password", 403)
 
+        elif not request.form.get("password_again"):
+            return apology("must provide password again", 403)
+
+        elif request.form.get("password") != request.form.get("password_again"):
+            return apology("must provide password again", 403)
+
     else:
         return render_template("register.html")
 
