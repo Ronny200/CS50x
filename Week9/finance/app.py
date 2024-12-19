@@ -51,7 +51,6 @@ def buy():
         symbol = request.form.get("symbol")
         shares_num = int(request.form.get("shares"))
         shares = lookup(symbol)
-        print(shares)
         if symbol == "":
             return apology("missing symbol", 400)
         elif shares_num == None:
@@ -61,7 +60,7 @@ def buy():
         else:
             user_id = session["user_id"]
             user_cash = usd(db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"])
-            shares_price = shares["price"]
+            shares_price = usd(shares["price"])
             shares_total_price = shares_price * shares_num
             print(user_cash, shares_price, shares_total_price)
             if shares_total_price > user_cash:
