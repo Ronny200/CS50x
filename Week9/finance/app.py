@@ -223,9 +223,10 @@ def sell():
     user_id = session["user_id"]
     shares = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
     print(shares)
-    # current_symbol = db.execute("SELECT symbol FROM shares WHERE user_id = ?", user_id)
-    print(type(current_symbol))
+
     if request.method == "POST":
-        pass
+        if request.form.get("value") == "Symbol":
+            return apology("Missing Symbol", 400)
+        
     else:
         return render_template("sell.html", symbols = shares)
