@@ -220,15 +220,13 @@ def register():
 @login_required
 def sell():
     """Sell shares of stock"""
-    user_id = session["user_id"]
-    user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
-    shares_all = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
-
-    sell_shares = request.form.get("shares")
-    sell_symbol = request.form.get("symbol")
-    print(sell_symbol)
-
     if request.method == "POST":
+        user_id = session["user_id"]
+        user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
+        sell_shares = request.form.get("shares")
+        sell_symbol = request.form.get("symbol")
+        print(sell_symbol)
+
         if sell_symbol == "":
             return apology("Missing Symbol", 400)
         elif sell_shares == "":
@@ -267,4 +265,5 @@ def sell():
 
 
     else:
+        shares_all = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
         return render_template("sell.html", symbols = shares_all)
