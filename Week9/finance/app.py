@@ -51,7 +51,7 @@ def buy():
         symbol = request.form.get("symbol")
         shares_num = int(request.form.get("shares"))
         shares = lookup(symbol)
-
+        print(shares)
         if symbol == "":
             return apology("missing symbol", 400)
         elif shares_num == None:
