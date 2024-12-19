@@ -68,11 +68,12 @@ def buy():
                 # 检查是否已存在当前股票
                 exist_shares = db.execute("SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, symbol)
                 if exist_shares:
-                    db.execute("UPDATE users SET cash = ? WHERE id = ?", new_cash, user_id)
-                    db.execute("INSERT INTO shares (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
+                    new_shares = int(exist_shares[0]["shares"]) +
+                    db.execute("UPDATE shares SET shares = ?, price = ?, total = ? WHERE user_id = ? AND symbol = ?)",
                                 user_id, symbol, shares_num, shares_price, shares_total_price)
                     db.execute("INSERT INTO history (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
                                 user_id, symbol, shares_num, shares_price, shares_total_price)
+                    db.execute("UPDATE users SET cash = ? WHERE id = ?", new_cash, user_id)
                     return redirect("/")
                 else:
                     db.execute("UPDATE users SET cash = ? WHERE id = ?", round(user_cash -
