@@ -63,6 +63,7 @@ def buy():
             shares_price = usd(shares["price"])
             shares_total_price = shares_price * shares_num
             print(user_cash, shares_price, shares_total_price)
+            print(type(user_cash), type(shares_price), type(shares_total_price))
             if shares_total_price > user_cash:
                 return apology("can't afford", 400)
             try:
