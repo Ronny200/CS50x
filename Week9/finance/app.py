@@ -58,8 +58,13 @@ def buy():
             shares_total_price = shares_price * shares_num
             if shares_total_price > user_cash:
                 return apology("can't afford", 400)
-            
-            return render_template("index.html")
+            try:
+                db.execute("INSERT INTO users (username, hash) VALUES(?, ?)", name, passwd)
+                session["user_id"] = name
+                return redirect("/")
+            except ValueError:
+                return apology("can't afford", 400)
+
     else:
         return render_template("buy.html")
 
