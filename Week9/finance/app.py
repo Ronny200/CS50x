@@ -57,8 +57,8 @@ def buy():
             return apology("missing symbol", 400)
         else:
             user_id = session["user_id"]
-            user_cash = float(db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"])
-            shares_price = float(shares["price"])
+            user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
+            shares_price = shares["price"]
             shares_total_price = shares_price * shares_num
             print(user_cash, shares_price, shares_total_price)
             print(type(user_cash), type(shares_price), type(shares_total_price))
