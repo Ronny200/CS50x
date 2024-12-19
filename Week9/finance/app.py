@@ -228,13 +228,12 @@ def register():
         exist_username = db.execute("SELECT * FROM users WHERE username = ?", username)
         if exist_username:
             return apology("username is existing", 400)
-        
+
         # 将新用户添加到数据库
-        name = request.form.get("username")
-        passwd = generate_password_hash(request.form.get("password"))
         try:
-            db.execute("INSERT INTO users (username, hash) VALUES(?, ?)", name, passwd)
-            session["user_id"] = name
+            passwd_hashed = generate_password_hash(password)
+            db.execute("INSERT INTO users (username, hash) VALUES(?, ?)", username, passwd_hashed)
+            session["user_id"] = username
             return redirect("/")
         except ValueError:
             return apology("username taken", 400)
