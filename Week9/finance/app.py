@@ -60,7 +60,8 @@ def buy():
             if shares_total_price > user_cash:
                 return apology("can't afford", 400)
             try:
-                db.execute("UPDATE users SET cash = (new) WHERE id = (id) VALUES(?, ?)", user-cash - )
+                db.execute("UPDATE users SET cash = (new) WHERE id = (id) VALUES(?, ?)", user_cash -
+                            shares_total_price, user_id)
                 db.execute("INSERT INTO shares (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
                             user_id, symbol, shares_num, shares_price, shares_total_price)
                 db.execute("INSERT INTO history (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
