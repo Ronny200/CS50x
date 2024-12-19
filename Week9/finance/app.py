@@ -239,6 +239,7 @@ def sell():
                 sell_price = current_shares["price"]
                 sell_total_price = round(sell_price * sell_shares, 2)
                 sql_shares = db.execute("SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, sell_symbol)
+                print(sql_shares)
                 new_shares = sql_shares - sell_shares
                 new_cash = round(user_cash + sell_total_price, 2)
                 sql_total = int(sql_shares[0]["total"])
