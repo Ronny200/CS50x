@@ -236,7 +236,9 @@ def sell():
             sql_shares = int(sql_shares[0]["shares"])
             sell_shares = int(sell_shares)
             if sell_shares > sql_shares:
-                return apology("Missing shares", 400)
+                return apology("Too many shares", 400)
+            try:
+                
 
 
     else:
