@@ -224,6 +224,9 @@ def sell():
     shares_all = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
     sell_shares = request.form.get("shares")
     sell_symbol = request.form.get("symbol")
+    current_share = lookup(sell_symbol)
+    sell_price = current_share["price"]
+    sell_total_price = 
     sql_shares = db.execute("SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, sell_symbol)
     if request.method == "POST":
         if sell_symbol == "":
@@ -238,7 +241,7 @@ def sell():
             if sell_shares > sql_shares:
                 return apology("Too many shares", 400)
             try:
-                
+
 
 
     else:
