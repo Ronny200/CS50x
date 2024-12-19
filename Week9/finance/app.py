@@ -109,7 +109,10 @@ def quote():
     get_symbol = request.form.get("symbol")
     if request.form.get("symbol" == ""):
         return apology("missing symbol", 400)
+    elif get_symbol == None:
+        return apology("missing symbol", 400)
     else:
+        
 
 
 
