@@ -49,7 +49,7 @@ def buy():
     """Buy shares of stock"""
     if request.method == "POST":
         symbol = request.form.get("symbol")
-        shares_num = request.form.get("Shares")
+        shares_num = request.form.get("shares")
         shares = lookup(symbol)
         print(shares_num)
         if symbol == "":
@@ -60,7 +60,7 @@ def buy():
             return apology("missing symbol", 400)
         else:
             user_id = session["user_id"]
-            user_cash = db.execute("SELECT cash FROM users WHERE id = (id) VALUES(?)", user_id)
+            user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)
             shares_price = shares["price"]
             shares_total_price = shares_price * shares_num
             if shares_total_price > user_cash:
