@@ -44,8 +44,9 @@ def buy():
     """Buy shares of stock"""
     if request.method == "POST":
         symbol = request.form.get("symbol")
+        shares_num = request.form.get("Shares")
         shares = lookup(symbol)
-        if symbol == "":
+        if symbol == "" or shares_num == "":
             return apology("missing symbol", 400)
         elif shares  == None:
             return apology("missing symbol", 400)
