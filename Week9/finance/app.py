@@ -53,7 +53,7 @@ def buy():
         elif shares  == None:
             return apology("missing symbol", 400)
         else:
-            
+            user_current_money = db.execute()
             return render_template("index.html")
     else:
         return render_template("buy.html")
