@@ -225,6 +225,7 @@ def sell():
     shares_all = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
     sell_shares = request.form.get("shares")
     sell_symbol = request.form.get("symbol")
+    print(sell_symbol)
     current_share = lookup(sell_symbol)
     sell_price = current_share["price"]
     sell_total_price = round(sell_price * sell_shares, 2)
