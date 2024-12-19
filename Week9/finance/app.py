@@ -261,7 +261,7 @@ def sell():
             return apology("Missing shares", 400)
 
         sell_shares = int(sell_shares_str)
-        
+
         user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
         sql_shares = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
 
