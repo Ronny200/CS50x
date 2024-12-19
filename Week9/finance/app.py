@@ -48,15 +48,18 @@ def index():
 def buy():
     """Buy shares of stock"""
     if request.method == "POST":
+        # 清理获取的数据
         symbol = request.form.get("symbol").strip()
         shares_str = request.form.get("share").strip()
-        shares_num = int(shares_str)
-        shares = lookup(symbol)
-        if symbol == "":
+
+        # 检测数据有效性
+        if not symbol:
             return apology("missing symbol", 400)
-        elif shares_num == "":
+        elif not shares_str.isdigit() or int(shares_str) <= 0:
             return apology("missing Shares", 400)
         else:
+            shares_num = int(shares_str)
+            shares = lookup(symbol)
             user_id = session["user_id"]
             user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
             shares_price = shares["price"]
