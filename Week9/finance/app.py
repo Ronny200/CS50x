@@ -225,15 +225,18 @@ def sell():
     sell_shares = request.form.get("shares")
     sell_symbol = request.form.get("symbol")
     sql_shares = db.execute("SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, sell_symbol)
-    print(int(sql_shares[0]["shares"]))
-
     if request.method == "POST":
         if sell_symbol == "":
             return apology("Missing Symbol", 400)
         elif sell_shares == "":
             return apology("Missing shares", 400)
+        elif not sql_shares:
+            return apology("Missing shares", 400)
         else:
+            sql_shares = int(sql_shares[0]["shares"])
             sell_shares = int(sell_shares)
+            if sell_shares > sql_shares:
+                return apology("Missing shares", 400)
 
 
     else:
