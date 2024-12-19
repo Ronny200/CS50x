@@ -108,12 +108,12 @@ def quote():
     """Get stock quote."""
     if request.method == "POST":
         shares = request.form.get("symbol")
-        if request.form.get("symbol" == ""):
+        if request.form.get("symbol")  == "":
             return apology("missing symbol", 400)
         elif shares == None:
             return apology("missing symbol", 400)
         else:
-            render_template("quoted.html", shares)
+            return render_template("quoted.html", shares)
     else:
         return render_template("quote.html")
 
