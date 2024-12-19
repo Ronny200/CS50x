@@ -228,9 +228,11 @@ def sell():
         else:
             user_id = session["user_id"]
             user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
-            sql_shares = int(sql_shares[0]["shares"])
+            sql_shares = db.execute("SELECT * FROM shares WHERE id = ?", user_id)
+
+            sql_share = int(sql_shares[0]["shares"])
             sell_shares = int(sell_shares)
-            if sell_shares > sql_shares:
+            if sell_shares > sql_share:
                 return apology("Too many shares", 400)
             try:
                 current_share = lookup(sell_symbol)
