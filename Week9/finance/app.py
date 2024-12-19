@@ -222,12 +222,19 @@ def sell():
     """Sell shares of stock"""
     user_id = session["user_id"]
     shares_all = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
-    print(shares)
-
+    sell_shares = request.form.get("shares")
+    sell_symbol = request.form.get("value")
+    sql_shares = db.execute("SELECT shares FROM shares WHERE id = ? AND symbol = ?", user_id, sell_symbol)
+    print(sql_shares, type(sql_shares))
 
     if request.method == "POST":
-        if request.form.get("value") == None:
+        if sell_symbol == "":
             return apology("Missing Symbol", 400)
+        elif sell_shares == "":
+            return apology("Missing shares", 400)
+        else:
+            sell_shares = int(sell_shares)
+
 
     else:
-        return render_template("sell.html", symbols = shares)
+        return render_template("sell.html", symbols = shares_all)
