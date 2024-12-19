@@ -221,12 +221,13 @@ def register():
 def sell():
     """Sell shares of stock"""
     user_id = session["user_id"]
-    shares = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
+    shares_all = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
     print(shares)
 
+
     if request.method == "POST":
-        if request.form.get("value") == "Symbol":
+        if request.form.get("value") == None:
             return apology("Missing Symbol", 400)
-        
+
     else:
         return render_template("sell.html", symbols = shares)
