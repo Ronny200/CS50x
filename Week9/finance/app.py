@@ -114,6 +114,7 @@ def quote():
         elif shares  == None:
             return apology("missing symbol", 400)
         else:
+            print(shares)
             return render_template("quoted.html", shares = shares)
     else:
         return render_template("quote.html")
