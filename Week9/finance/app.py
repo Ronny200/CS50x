@@ -61,8 +61,9 @@ def buy():
                 return apology("can't afford", 400)
             try:
                 db.execute("INSERT INTO shares (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
-                            name, passwd)
-                session["user_id"] = name
+                            user_id, symbol, shares_num, shares_price, shares_total_price)
+                db.execute("INSERT INTO history (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
+                            user_id, symbol, shares_num, shares_price, shares_total_price)
                 return redirect("/")
             except ValueError:
                 return apology("can't afford", 400)
