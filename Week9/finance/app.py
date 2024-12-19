@@ -225,7 +225,7 @@ def sell():
     sell_shares = request.form.get("shares")
     sell_symbol = request.form.get("symbol")
     sql_shares = db.execute("SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, sell_symbol)
-    print(sql_shares[0]["shares"])
+    print(int(sql_shares[0]["shares"]))
 
     if request.method == "POST":
         if sell_symbol == "":
