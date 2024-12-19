@@ -226,7 +226,7 @@ def sell():
     sell_symbol = request.form.get("symbol")
     current_share = lookup(sell_symbol)
     sell_price = current_share["price"]
-    sell_total_price = 
+    sell_total_price = round(sell_price * sell_shares, 2)
     sql_shares = db.execute("SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, sell_symbol)
     if request.method == "POST":
         if sell_symbol == "":
