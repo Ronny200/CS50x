@@ -106,10 +106,11 @@ def logout():
 @login_required
 def quote():
     """Get stock quote."""
-    if request.form.get("symbol" == None):
+    get_symbol = request.form.get("symbol")
+    if request.form.get("symbol" == ""):
         return apology("missing symbol", 400)
     else:
-        
+
 
 
 @app.route("/register", methods=["GET", "POST"])
