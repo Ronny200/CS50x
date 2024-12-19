@@ -5,9 +5,45 @@
 
 {% block main %}
 <form action="/" method="post">
-    <div class="mb-3">
-        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="symbol" placeholder="Symbol"
-            type="text">
+    <div class="container py-5 text-center">
+      <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-start" fr-bold-37f361a02a="">Symbol</th>
+                <th class="text-end" fr-bold-37f361a02a="">Shares</th>
+                <th class="text-end" fr-bold-37f361a02a="">Price</th>
+                <th class="text-end" fr-bold-37f361a02a="">TOTAL</th>
+            </tr>
+        </thead>
+       <tbody>
+
+                <tr>
+                    <td class="text-start">NFLX</td>
+                    <td class="text-end">1</td>
+                    <td class="text-end">$669.81</td>
+                    <td class="text-end">$669.81</td>
+                </tr>
+
+                <tr>
+                    <td class="text-start">NVDA</td>
+                    <td class="text-end">2</td>
+                    <td class="text-end">$103.50</td>
+                    <td class="text-end">$207.00</td>
+                </tr>
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="3" fr-bold-37f361a02a="">Cash</td>
+                <td class="border-0 text-end">$9,125.86</td>
+            </tr>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="3" fr-bold-37f361a02a="">TOTAL</td>
+                <td class="border-0 w-bold text-end">$10,002.67</td>
+            </tr>
+        </tfoot>
+    </table>
+
     </div>
 
 </form>
