@@ -35,7 +35,7 @@ def after_request(response):
 @login_required
 def index():
     """Show portfolio of stocks"""
-    return apology("TODO")
+    return render_template("index.html")
 
 
 @app.route("/buy", methods=["GET", "POST"])
@@ -53,8 +53,8 @@ def buy():
         elif shares  == None:
             return apology("missing symbol", 400)
         else:
-            print(shares)
-            return render_template("quoted.html", shares = shares)
+            
+            return render_template("index.html")
     else:
         return render_template("buy.html")
 
