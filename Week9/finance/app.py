@@ -74,7 +74,7 @@ def buy():
                     new_total = round(exist_shares[0]["total"] + shares_total_price, 2)
 
                     # 更新sql
-                    db.execute("UPDATE shares SET shares = ?, price = ?, total = ? WHERE user_id = ? AND symbol = ?)",
+                    db.execute("UPDATE shares SET shares = ?, price = ?, total = ? WHERE user_id = ? AND symbol = ?",
                                 new_shares, new_price, new_total, user_id, symbol)
 
                     # 添加新历史记录
