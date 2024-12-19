@@ -60,7 +60,7 @@ def buy():
             return apology("missing symbol", 400)
         else:
             user_id = session["user_id"]
-            user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
+            user_cash = usd(db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"])
             shares_price = shares["price"]
             shares_total_price = shares_price * shares_num
             print(user_cash, shares_price, shares_total_price)
