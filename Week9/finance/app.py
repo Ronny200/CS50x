@@ -228,15 +228,15 @@ def sell():
             return apology("Missing shares", 400)
         else:
             user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
-            sql_shares = db.execute("SELECT * FROM shares WHERE id = ?", user_id)
+            sql_shares = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
 
             sql_share = int(sql_shares[0]["shares"])
             sell_shares = int(sell_shares)
             if sell_shares > sql_share:
                 return apology("Too many shares", 400)
             try:
-                current_share = lookup(sell_symbol)
-                sell_price = current_share["price"]
+                current_shares = lookup(sell_symbol)
+                sell_price = current_shares["price"]
                 sell_total_price = round(sell_price * sell_shares, 2)
                 sql_shares = db.execute("SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, sell_symbol)
                 new_shares = sql_shares - sell_shares
