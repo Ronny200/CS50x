@@ -241,7 +241,9 @@ def sell():
             if sell_shares > sql_shares:
                 return apology("Too many shares", 400)
             try:
-
+                
+            except ValueError as e:
+                return apology(f"{e}", 400)
 
 
     else:
