@@ -18,10 +18,10 @@
        <tbody>
             {% for share in shares %}
               <tr>
-                <td class="text-start">shares</td>
-                <td class="text-end">1</td>
-                <td class="text-end">$669.81</td>
-                <td class="text-end">$669.81</td>
+                <td class="text-start">{{ share["symbol"] }}</td>
+                <td class="text-end">{{ share["shares"] }}</td>
+                <td class="text-end">${{ share["price"] }}</td>
+                <td class="text-end">${{ share["total"] }}</td>
               </tr>
             {% endfor %}
 
