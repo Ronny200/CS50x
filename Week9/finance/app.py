@@ -59,10 +59,11 @@ def buy():
             user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
             shares_price = shares["price"]
             shares_total_price = shares_price * shares_num
-            print(user_cash, shares_price, shares_total_price)
-            print(type(user_cash), type(shares_price), type(shares_total_price))
             if shares_total_price > user_cash:
                 return apology("can't afford", 400)
+
+            # 检查是否已存在当前股票
+            exist_shares = db.execute("SELECT ")
             try:
                 db.execute("UPDATE users SET cash = ? WHERE id = ?", round(user_cash -
                             shares_total_price, 2), user_id)
