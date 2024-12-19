@@ -37,7 +37,9 @@ def index():
     user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)
     usd_cash = usd(user_cash[0]["cash"])
     user_shares = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
-    print(user_shares)
+    db.execute("INSERT INTO shares (user_id, symbol, shares, price, total) VALUES (?, ?, ?, ?, ?)",
+                    (user_id, "NVDA", 1, 103.05, 103.05)
+                )
     return render_template("index.html", user_cash = usd_cash, shares = user_shares)
 
 
