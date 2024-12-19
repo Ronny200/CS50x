@@ -12,11 +12,11 @@
                 <th class="text-start" fr-bold-37f361a02a="">Symbol</th>
                 <th class="text-end" fr-bold-37f361a02a="">Shares</th>
                 <th class="text-end" fr-bold-37f361a02a="">Price</th>
-                <th class="text-end" fr-bold-37f361a02a="">TOTAL</th>
+                <th class="text-end" fr-bold-37f361a02a="">Transacted</th>
             </tr>
         </thead>
        <tbody>
-            {% for share in shares %}
+            {% for share in history %}
               <tr>
                 <td class="text-start">{{ share["symbol"] }}</td>
                 <td class="text-end">{{ share["shares"] }}</td>
