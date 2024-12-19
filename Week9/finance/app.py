@@ -53,13 +53,14 @@ def buy():
         elif shares  == None:
             return apology("missing symbol", 400)
         else:
-            user_cash = db.execute(SELECT cash FROM users)
+            user_id = session["user_id"]
+            user_cash = db.execute("SELECT cash FROM users WHERE id = (id) VALUES(?)", user_id)
             shares_price = shares["price"]
             shares_total_price = shares_price * shares_num
             if shares_total_price > user_cash:
                 return apology("can't afford", 400)
             try:
-                db.execute("INSERT INTO users (user_id, symbol, shares, price, total) VALUES(?, ?)",
+                db.execute("INSERT INTO users (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
                             name, passwd)
                 session["user_id"] = name
                 return redirect("/")
