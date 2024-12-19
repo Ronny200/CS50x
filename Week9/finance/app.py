@@ -221,9 +221,11 @@ def register():
 def sell():
     """Sell shares of stock"""
     user_id = session["user_id"]
-    current_symbol = db.execute("SELECT symbol FROM shares WHERE id = ?", user_id)
-    print(current_symbol)
+    shares = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
+    print(shares)
+    # current_symbol = db.execute("SELECT symbol FROM shares WHERE user_id = ?", user_id)
+    print(type(current_symbol))
     if request.method == "POST":
         pass
     else:
-        return render_template("sell.html")
+        return render_template("sell.html", symbols = shares)
