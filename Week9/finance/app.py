@@ -50,7 +50,7 @@ def buy():
     if request.method == "POST":
         # 清理获取的数据
         symbol = request.form.get("symbol").strip()
-        shares_str = request.form.get("share").strip()
+        shares_str = request.form.get("shares").strip()
 
         # 检测数据有效性
         if not symbol:
