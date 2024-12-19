@@ -221,8 +221,8 @@ def register():
 def sell():
     """Sell shares of stock"""
     user_id = session["user_id"]
+    user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
     shares_all = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
-
     sell_shares = request.form.get("shares")
     sell_symbol = request.form.get("symbol")
     current_share = lookup(sell_symbol)
