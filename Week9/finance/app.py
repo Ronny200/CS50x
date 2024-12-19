@@ -68,23 +68,35 @@ def buy():
                 # 检查是否已存在当前股票
                 exist_shares = db.execute("SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, symbol)
                 if exist_shares:
+                    # 获取需要更新的数值
                     new_shares = int(exist_shares[0]["shares"]) +shares_num
                     new_price = shares_price
-                    new_total = 
+                    new_total = round(exist_shares[0]["total"] + shares_total_price, 2)
+
+                    # 更新sql
                     db.execute("UPDATE shares SET shares = ?, price = ?, total = ? WHERE user_id = ? AND symbol = ?)",
-                                user_id, symbol, shares_num, shares_price, shares_total_price)
+                                new_shares, new_price, new_total, user_id, symbol)
+
+                    # 添加新历史记录
                     db.execute("INSERT INTO history (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
                                 user_id, symbol, shares_num, shares_price, shares_total_price)
+
+                    # 更新余额
                     db.execute("UPDATE users SET cash = ? WHERE id = ?", new_cash, user_id)
                     return redirect("/")
                 else:
-                    db.execute("UPDATE users SET cash = ? WHERE id = ?", round(user_cash -
-                                shares_total_price, 2), user_id)
+                    # 添加新股票
                     db.execute("INSERT INTO shares (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
                                 user_id, symbol, shares_num, shares_price, shares_total_price)
+
+                    # 添加新历史记录
                     db.execute("INSERT INTO history (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
                                 user_id, symbol, shares_num, shares_price, shares_total_price)
+                    # 更新余额
+                    db.execute("UPDATE users SET cash = ? WHERE id = ?", round(user_cash -
+                                shares_total_price, 2), user_id)
                     return redirect("/")
+
             except ValueError as e:
                 return apology(f"{e}", 400)
 
