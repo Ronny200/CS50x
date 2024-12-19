@@ -63,10 +63,10 @@ def buy():
             user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
             shares_price = shares["price"]
             shares_total_price = shares_price * shares_num
+            print(user_cash, shares_price, shares_total_price)
             if shares_total_price > user_cash:
                 return apology("can't afford", 400)
             try:
-                print(f"Executing: INSERT INTO shares (user_id, symbol, shares, price, total) VALUES({user_id}, {symbol}, {shares_num}, {shares_price}, {shares_total_price})")
                 db.execute("UPDATE users SET cash = ? WHERE id = ?", user_cash -
                             shares_total_price, user_id)
                 db.execute("INSERT INTO shares (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
