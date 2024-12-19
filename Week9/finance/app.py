@@ -87,38 +87,33 @@ def buy():
         try:
             # 检查数据库是否已存在当前股票
             exist_shares = db.execute("SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, symbol)
+
+            # 更新数据库中的股票数据
             if exist_shares:
-                # 数据库需要更新的数值
                 new_shares = exist_shares[0]["shares"] + shares_num
                 new_price = shares_price
                 new_total = round(exist_shares[0]["total"] + shares_total_price, 2)
 
-                # 更新sql
                 db.execute("UPDATE shares SET shares = ?, price = ?, total = ? WHERE user_id = ? AND symbol = ?",
                             new_shares, new_price, new_total, user_id, symbol)
 
-                # 添加新历史记录
-                db.execute("INSERT INTO history (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
-                            user_id, symbol, shares_num, shares_price, shares_total_price)
-
-                # 更新余额
-                db.execute("UPDATE users SET cash = ? WHERE id = ?", new_cash, user_id)
-                return redirect("/")
+            # 添加新股票
             else:
-                # 添加新股票
                 db.execute("INSERT INTO shares (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
                             user_id, symbol, shares_num, shares_price, shares_total_price)
 
-                # 添加新历史记录
-                db.execute("INSERT INTO history (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
-                            user_id, symbol, shares_num, shares_price, shares_total_price)
-                # 更新余额
-                db.execute("UPDATE users SET cash = ? WHERE id = ?", round(user_cash -
-                            shares_total_price, 2), user_id)
-                return redirect("/")
 
-        except ValueError as e:
-            return apology(f"{e}", 400)
+            # 刷新现有资金
+            db.execute("UPDATE users SET cash = ? WHERE id = ?", new_cash, user_id)
+
+            # 添加购买历史记录
+            db.execute("INSERT INTO history (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
+                        user_id, symbol, shares_num, shares_price, shares_total_price)
+
+            return redirect("/")
+
+        except Exception as err:
+            return apology(f"{err}", 400)
 
     else:
         return render_template("buy.html")
