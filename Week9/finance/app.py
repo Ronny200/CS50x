@@ -106,7 +106,10 @@ def logout():
 @login_required
 def quote():
     """Get stock quote."""
-    return apology("TODO")
+    if request.form.get("symbol" == None):
+        return apology("missing symbol", 400)
+    else:
+        
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -148,4 +151,3 @@ def register():
 def sell():
     """Sell shares of stock"""
     return apology("TODO")
- 
