@@ -20,7 +20,7 @@
               <tr>
                 <td class="text-start">{{ share["symbol"] }}</td>
                 <td class="text-end">{{ share["shares"] }}</td>
-                <td class="text-end">${{ share["price"] }}</td>
+                <td class="text-end">{{ share["price"] | usd }}</td>
                 <td class="text-end">{{ share["transacted"] }}</td>
               </tr>
             {% endfor %}
