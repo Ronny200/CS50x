@@ -35,7 +35,8 @@ def index():
     """Show portfolio of stocks"""
     # 判断是否登录，如果没有登录则返回登录页面
     if "user_id" not in session:
-        return render_template("login.html")
+        return redirect("/login")
+    
     user_id = session["user_id"]
     user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)
     usd_cash = usd(user_cash[0]["cash"])
