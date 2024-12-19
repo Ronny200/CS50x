@@ -115,7 +115,7 @@ def quote():
         else:
             render_template("quoted.html", shares)
     else:
-        render_template("quoted.html")
+        return render_template("quote.html")
 
 
 
