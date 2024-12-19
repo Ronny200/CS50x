@@ -60,7 +60,7 @@ def buy():
             if shares_total_price > user_cash:
                 return apology("can't afford", 400)
             try:
-                db.execute("INSERT INTO users (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
+                db.execute("INSERT INTO shares (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
                             name, passwd)
                 session["user_id"] = name
                 return redirect("/")
