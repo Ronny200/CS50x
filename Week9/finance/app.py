@@ -222,6 +222,7 @@ def sell():
     """Sell shares of stock"""
     user_id = session["user_id"]
     shares_all = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
+
     sell_shares = request.form.get("shares")
     sell_symbol = request.form.get("symbol")
     current_share = lookup(sell_symbol)
@@ -242,8 +243,7 @@ def sell():
                 return apology("Too many shares", 400)
             try:
                 new_shares = sql_shares - sell_shares
-                new_price = shares_price
-                new_total = round(exist_shares[0]["total"] + shares_total_price, 2)
+                new_cash = round(, 2)
 
                 # 更新sql
                 db.execute("UPDATE shares SET shares = ?, price = ?, total = ? WHERE user_id = ? AND symbol = ?",
