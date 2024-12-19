@@ -88,8 +88,8 @@ def buy():
             # 检查数据库是否已存在当前股票
             exist_shares = db.execute("SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, symbol)
             if exist_shares:
-                # 获取需要更新的数值
-                new_shares = int(exist_shares[0]["shares"]) +shares_num
+                # 数据库需要更新的数值
+                new_shares = exist_shares[0]["shares"] + shares_num
                 new_price = shares_price
                 new_total = round(exist_shares[0]["total"] + shares_total_price, 2)
 
