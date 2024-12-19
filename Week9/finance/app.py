@@ -241,7 +241,21 @@ def sell():
             if sell_shares > sql_shares:
                 return apology("Too many shares", 400)
             try:
-                
+                new_shares = sql_shares - sell_shares
+                new_price = shares_price
+                new_total = round(exist_shares[0]["total"] + shares_total_price, 2)
+
+                # 更新sql
+                db.execute("UPDATE shares SET shares = ?, price = ?, total = ? WHERE user_id = ? AND symbol = ?",
+                            new_shares, new_price, new_total, user_id, symbol)
+
+                # 添加新历史记录
+                db.execute("INSERT INTO history (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
+                            user_id, symbol, shares_num, shares_price, shares_total_price)
+
+                # 更新余额
+                db.execute("UPDATE users SET cash = ? WHERE id = ?", new_cash, user_id)
+                return redirect("/")
             except ValueError as e:
                 return apology(f"{e}", 400)
 
