@@ -256,6 +256,9 @@ def sell():
                 # 更新余额
                 db.execute("UPDATE users SET cash = ? WHERE id = ?", new_cash, user_id)
 
+                if new_shares == 0:
+                    
+
                 return redirect("/")
             except ValueError as e:
                 return apology(f"{e}", 400)
