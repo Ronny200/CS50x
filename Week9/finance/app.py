@@ -52,58 +52,73 @@ def buy():
         symbol = request.form.get("symbol").strip()
         shares_str = request.form.get("shares").strip()
 
-        # 检测数据有效性
+        # 检测股票代码是否为空
         if not symbol:
             return apology("missing symbol", 400)
-        elif not shares_str.isdigit() or int(shares_str) <= 0:
+
+        # 检测股票数量是否为空或者不为数字
+        if not shares_str.isdigit() or int(shares_str) <= 0:
             return apology("missing Shares", 400)
+
+        # 股票数量转为数字并通过lookup获取股票信息
+        shares_num = int(shares_str)
+        shares_info = lookup(symbol)
+
+        # 检测股票信息是否错误
+        if not shares_info:
+            return apology("missing Shares", 400)
+
+        user_id = session["user_id"]
+
+        # 从数据库获取用户当前资金
+        user_cash_result = db.execute("SELECT cash FROM users WHERE id = ?", user_id)
+        user_cash = user_cash_result[0]["cash"]
+
+        # 获取股票当前价格和购买的总价
+        shares_price = shares_info["price"]
+        shares_total_price = shares_price * shares_num
+
+        # 判断是否有足够的资金购买股票
+        if shares_total_price > user_cash:
+            return apology("can't afford", 400)
         else:
-            shares_num = int(shares_str)
-            shares = lookup(symbol)
-            user_id = session["user_id"]
-            user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
-            shares_price = shares["price"]
-            shares_total_price = shares_price * shares_num
-            if shares_total_price > user_cash:
-                return apology("can't afford", 400)
+            new_cash = round(user_cash - shares_total_price, 2)
+
+        try:
+            # 检查数据库是否已存在当前股票
+            exist_shares = db.execute("SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, symbol)
+            if exist_shares:
+                # 获取需要更新的数值
+                new_shares = int(exist_shares[0]["shares"]) +shares_num
+                new_price = shares_price
+                new_total = round(exist_shares[0]["total"] + shares_total_price, 2)
+
+                # 更新sql
+                db.execute("UPDATE shares SET shares = ?, price = ?, total = ? WHERE user_id = ? AND symbol = ?",
+                            new_shares, new_price, new_total, user_id, symbol)
+
+                # 添加新历史记录
+                db.execute("INSERT INTO history (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
+                            user_id, symbol, shares_num, shares_price, shares_total_price)
+
+                # 更新余额
+                db.execute("UPDATE users SET cash = ? WHERE id = ?", new_cash, user_id)
+                return redirect("/")
             else:
-                new_cash = round(user_cash - shares_total_price, 2)
+                # 添加新股票
+                db.execute("INSERT INTO shares (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
+                            user_id, symbol, shares_num, shares_price, shares_total_price)
 
-            try:
-                # 检查是否已存在当前股票
-                exist_shares = db.execute("SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, symbol)
-                if exist_shares:
-                    # 获取需要更新的数值
-                    new_shares = int(exist_shares[0]["shares"]) +shares_num
-                    new_price = shares_price
-                    new_total = round(exist_shares[0]["total"] + shares_total_price, 2)
+                # 添加新历史记录
+                db.execute("INSERT INTO history (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
+                            user_id, symbol, shares_num, shares_price, shares_total_price)
+                # 更新余额
+                db.execute("UPDATE users SET cash = ? WHERE id = ?", round(user_cash -
+                            shares_total_price, 2), user_id)
+                return redirect("/")
 
-                    # 更新sql
-                    db.execute("UPDATE shares SET shares = ?, price = ?, total = ? WHERE user_id = ? AND symbol = ?",
-                                new_shares, new_price, new_total, user_id, symbol)
-
-                    # 添加新历史记录
-                    db.execute("INSERT INTO history (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
-                                user_id, symbol, shares_num, shares_price, shares_total_price)
-
-                    # 更新余额
-                    db.execute("UPDATE users SET cash = ? WHERE id = ?", new_cash, user_id)
-                    return redirect("/")
-                else:
-                    # 添加新股票
-                    db.execute("INSERT INTO shares (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
-                                user_id, symbol, shares_num, shares_price, shares_total_price)
-
-                    # 添加新历史记录
-                    db.execute("INSERT INTO history (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
-                                user_id, symbol, shares_num, shares_price, shares_total_price)
-                    # 更新余额
-                    db.execute("UPDATE users SET cash = ? WHERE id = ?", round(user_cash -
-                                shares_total_price, 2), user_id)
-                    return redirect("/")
-
-            except ValueError as e:
-                return apology(f"{e}", 400)
+        except ValueError as e:
+            return apology(f"{e}", 400)
 
     else:
         return render_template("buy.html")
