@@ -68,7 +68,9 @@ def buy():
                 # 检查是否已存在当前股票
                 exist_shares = db.execute("SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, symbol)
                 if exist_shares:
-                    new_shares = int(exist_shares[0]["shares"]) +
+                    new_shares = int(exist_shares[0]["shares"]) +shares_num
+                    new_price = shares_price
+                    new_total = 
                     db.execute("UPDATE shares SET shares = ?, price = ?, total = ? WHERE user_id = ? AND symbol = ?)",
                                 user_id, symbol, shares_num, shares_price, shares_total_price)
                     db.execute("INSERT INTO history (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
