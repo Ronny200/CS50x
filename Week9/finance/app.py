@@ -106,13 +106,13 @@ def logout():
 @login_required
 def quote():
     """Get stock quote."""
-    share = request.form.get("symbol")
+    shares = request.form.get("symbol")
     if request.form.get("symbol" == ""):
         return apology("missing symbol", 400)
-    elif get_symbol == None:
+    elif shares == None:
         return apology("missing symbol", 400)
     else:
-        render_template("quoted.html", get_symbol)
+        render_template("quoted.html", shares)
 
 
 
