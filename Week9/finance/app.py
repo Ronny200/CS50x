@@ -57,7 +57,8 @@ def buy():
             shares_price = shares["price"]
             shares_total_price = shares_price * shares_num
             if shares_total_price > user_cash:
-                return apology("missing symbol", 400)
+                return apology("can't afford", 400)
+            
             return render_template("index.html")
     else:
         return render_template("buy.html")
