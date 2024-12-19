@@ -7,6 +7,6 @@ CREATE TABLE shares (
     shares INTEGER NOT NULL, -- 股票数量
     price NUMERIC NOT NULL, -- 单股价格
     total NUMERIC NOT NULL, -- 总价 (单价 * 数量)
-    transacted TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 交易时间，默认为当前时间
+    -- transacted TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 交易时间，默认为当前时间
     FOREIGN KEY (user_id) REFERENCES users(id) -- 设置外键约束
 );
