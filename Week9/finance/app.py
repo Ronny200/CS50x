@@ -227,10 +227,7 @@ def sell():
     sell_shares = request.form.get("shares")
     sell_symbol = request.form.get("symbol")
     print(sell_symbol)
-    current_share = lookup(sell_symbol)
-    sell_price = current_share["price"]
-    sell_total_price = round(sell_price * sell_shares, 2)
-    sql_shares = db.execute("SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, sell_symbol)
+
     if request.method == "POST":
         if sell_symbol == "":
             return apology("Missing Symbol", 400)
@@ -244,6 +241,10 @@ def sell():
             if sell_shares > sql_shares:
                 return apology("Too many shares", 400)
             try:
+                current_share = lookup(sell_symbol)
+                sell_price = current_share["price"]
+                sell_total_price = round(sell_price * sell_shares, 2)
+                sql_shares = db.execute("SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, sell_symbol)
                 new_shares = sql_shares - sell_shares
                 new_cash = round(user_cash + sell_total_price, 2)
                 sql_total = int(sql_shares[0]["total"])
