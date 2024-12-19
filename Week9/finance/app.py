@@ -231,8 +231,9 @@ def register():
 
         # 将新用户添加到数据库
         try:
-            passwd_hashed = generate_password_hash(password)
-            db.execute("INSERT INTO users (username, hash) VALUES(?, ?)", username, passwd_hashed)
+            password_hashed = generate_password_hash(password)
+            db.execute("INSERT INTO users (username, hash) VALUES(?, ?)", username, password_hashed)
+            
             session["user_id"] = username
             return redirect("/")
         except ValueError:
