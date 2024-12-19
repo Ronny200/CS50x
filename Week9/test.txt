@@ -10,3 +10,17 @@ CREATE TABLE shares (
     -- transacted TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 交易时间，默认为当前时间
     FOREIGN KEY (user_id) REFERENCES users(id) -- 设置外键约束
 );
+
+CREATE TABLE history (
+    history_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    user_id INTEGER NOT NULL,
+    symbol TEXT NOT NULL,
+    shares INTEGER NOT NULL,
+    price NUMERIC NOT NULL,
+    total NUMERIC NOT NULL,
+    transacted TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 买卖等交易时间记录
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+
+CREATE UNIQUE INDEX user_id ON shares (user_id);
