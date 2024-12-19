@@ -53,7 +53,11 @@ def buy():
         elif shares  == None:
             return apology("missing symbol", 400)
         else:
-            user_current_money = db.execute()
+            user_cash = db.execute(SELECT cash FROM users)
+            shares_price = shares["price"]
+            shares_total_price = shares_price * shares_num
+            if shares_total_price > user_cash:
+                return apology("missing symbol", 400)
             return render_template("index.html")
     else:
         return render_template("buy.html")
