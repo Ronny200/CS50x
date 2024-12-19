@@ -258,7 +258,7 @@ def sell():
 
                 # 当手中持有股票数量为0，则删除股票记录
                 if new_shares == 0:
-                    db.execute("DELETE FROM shares WHERE id = ? AND symbol = ?", user_id, sell_symbol)
+                    db.execute("DELETE FROM shares WHERE user_id = ? AND symbol = ?", user_id, sell_symbol)
 
                 return redirect("/")
             except ValueError as e:
