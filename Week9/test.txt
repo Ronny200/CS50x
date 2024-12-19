@@ -1,0 +1,1 @@
+{'name': 'Apple Inc. Common Stock', 'price': 221.76, 'symbol': 'AAPL'}
