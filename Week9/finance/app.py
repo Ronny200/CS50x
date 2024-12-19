@@ -110,7 +110,6 @@ def history():
     """Show history of transactions"""
     user_id = session["user_id"]
     history = db.execute("SELECT * FROM history WHERE user_id = ?", user_id)
-    print(history)
     return render_template("history.html", history = history)
 
 
