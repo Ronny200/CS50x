@@ -207,21 +207,28 @@ def register():
     """Register user"""
     session.clear()
     if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        confirmation = request.form.get("confirmation")
 
         # 对表单开始检查
-        if not request.form.get("username"):
+        if not username:
             return apology("missing username", 400)
 
-        # Ensure password was submitted
-        elif not request.form.get("password"):
+        elif not password:
             return apology("missing password", 400)
 
-        elif not request.form.get("confirmation"):
+        elif not confirmation:
             return apology("passwords dont't match", 400)
 
-        elif request.form.get("password") != request.form.get("confirmation"):
+        elif password != confirmation:
             return apology("passwords dont't match", 400)
 
+        # 检查用户名是否已被占用
+        exist_username = db.execute("SELECT * FROM users WHERE username = ?", username)
+        if exist_username:
+            return apology("username is existing", 400)
+        
         # 将新用户添加到数据库
         name = request.form.get("username")
         passwd = generate_password_hash(request.form.get("password"))
