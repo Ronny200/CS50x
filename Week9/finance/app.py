@@ -50,10 +50,8 @@ def buy():
         shares = lookup(symbol)
         if symbol == "":
             return apology("missing symbol", 400)
-        elif shares_num == None:
+        elif shares_num == "":
             return apology("missing Shares", 400)
-        elif shares  == None:
-            return apology("missing symbol", 400)
         else:
             user_id = session["user_id"]
             user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
@@ -221,19 +219,15 @@ def register():
 def sell():
     """Sell shares of stock"""
     if request.method == "POST":
-        user_id = session["user_id"]
-        user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
         sell_shares = request.form.get("shares")
         sell_symbol = request.form.get("symbol")
-        print(sell_symbol)
-
         if sell_symbol == "":
             return apology("Missing Symbol", 400)
         elif sell_shares == "":
             return apology("Missing shares", 400)
-        elif not sql_shares:
-            return apology("Missing shares", 400)
         else:
+            user_id = session["user_id"]
+            user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
             sql_shares = int(sql_shares[0]["shares"])
             sell_shares = int(sell_shares)
             if sell_shares > sql_shares:
