@@ -233,8 +233,9 @@ def register():
         try:
             password_hashed = generate_password_hash(password)
             db.execute("INSERT INTO users (username, hash) VALUES(?, ?)", username, password_hashed)
-            
-            session["user_id"] = username
+
+            user_id = db.execute("SELECT id FROM users WHERE username = ?", username)[0]["id"]
+            session["user_id"] = user_id
             return redirect("/")
         except ValueError:
             return apology("username taken", 400)
