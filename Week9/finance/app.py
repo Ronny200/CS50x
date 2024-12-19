@@ -107,8 +107,11 @@ def logout():
 def quote():
     """Get stock quote."""
     if request.method == "POST":
-        shares = lookup(request.form.get("symbol"))
-        if symbol  == None:
+        symbol = request.form.get("symbol")
+        shares = lookup(symbol)
+        if symbol == "":
+            return apology("missing symbol", 400)
+        elif shares  == None:
             return apology("missing symbol", 400)
         else:
             return render_template("quoted.html", shares = shares)
