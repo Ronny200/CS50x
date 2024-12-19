@@ -244,6 +244,7 @@ def sell():
             try:
                 new_shares = sql_shares - sell_shares
                 new_cash = round(user_cash + sell_total_price, 2)
+                new_total = round()
 
                 # 更新sql
                 db.execute("UPDATE users SET cash = ? WHERE id = ?", new_cash, user_id)
