@@ -218,6 +218,7 @@ def register():
 @login_required
 def sell():
     """Sell shares of stock"""
+    user_id = session["user_id"]
     if request.method == "POST":
         sell_shares = request.form.get("shares")
         sell_symbol = request.form.get("symbol")
@@ -226,7 +227,6 @@ def sell():
         elif sell_shares == "":
             return apology("Missing shares", 400)
         else:
-            user_id = session["user_id"]
             user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
             sql_shares = db.execute("SELECT * FROM shares WHERE id = ?", user_id)
 
