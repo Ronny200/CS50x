@@ -270,11 +270,11 @@ def sell():
             sql_shares = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
 
             sql_share = int(sql_shares[0]["shares"])
-            sell_shares = int(sell_shares)
+
 
             if sell_shares > sql_share:
                 return apology("Too many shares", 400)
-            
+
             try:
                 current_shares = lookup(sell_symbol)
                 sell_price = current_shares["price"]
