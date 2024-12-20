@@ -258,53 +258,50 @@ def sell():
         if sell_symbol == "":
             return apology("Missing Symbol", 400)
 
-        elif sell_shares_str == "":
+        if sell_shares_str == "":
             return apology("Missing shares", 400)
 
-        elif not sell_shares_str.isdigit() or int(sell_shares_str) <= 0:
+        if not sell_shares_str.isdigit() or int(sell_shares_str) <= 0:
             return apology("Missing shares", 400)
 
-        else:
-            sell_shares = int(sell_shares_str)
-            user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
-            sql_shares = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
+        current_shares = lookup(sell_symbol)
+        user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
 
-            sql_share = int(sql_shares[0]["shares"])
+        sql_shares_info = db.execute("SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, sell_symbol)
+        sql_shares = int(sql_shares_info[0]["shares"])
+        sql_total = int(sql_shares_info[0]["total"])
 
+        sell_shares = int(sell_shares_str)
+        sell_price = current_shares["price"]
+        sell_total_price = round(sell_price * sell_shares, 2)
 
-            if sell_shares > sql_share:
-                return apology("Too many shares", 400)
+        if sell_shares > sql_shares:
+            return apology("Too many shares", 400)
 
-            try:
-                current_shares = lookup(sell_symbol)
-                sell_price = current_shares["price"]
-                sell_total_price = round(sell_price * sell_shares, 2)
-                sql_shares = db.execute("SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, sell_symbol)
-                sql_share = int(sql_shares[0]["shares"])
-                new_shares = sql_share - sell_shares
-                new_cash = round(user_cash + sell_total_price, 2)
-                sql_total = int(sql_shares[0]["total"])
-                new_total = round(sql_total - sell_total_price)
+        try:
+            new_shares = sql_shares - sell_shares
+            new_cash = round(user_cash + sell_total_price, 2)
+            new_total = round(sql_total - sell_total_price)
 
-                # 更新sql
-                db.execute("UPDATE shares SET shares = ?, total = ? WHERE user_id = ? AND symbol = ?",
-                                new_shares,  new_total, user_id, sell_symbol)
+            # 更新sql
+            db.execute("UPDATE shares SET shares = ?, total = ? WHERE user_id = ? AND symbol = ?",
+                            new_shares,  new_total, user_id, sell_symbol)
 
-                # 添加新历史记录
-                db.execute("INSERT INTO history (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
-                            user_id, sell_symbol, -sell_shares, sell_price, sell_total_price)
+            # 添加新历史记录
+            db.execute("INSERT INTO history (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
+                        user_id, sell_symbol, -sell_shares, sell_price, sell_total_price)
 
-                # 更新余额
-                db.execute("UPDATE users SET cash = ? WHERE id = ?", new_cash, user_id)
+            # 更新余额
+            db.execute("UPDATE users SET cash = ? WHERE id = ?", new_cash, user_id)
 
-                # 当手中持有股票数量为0，则删除股票记录
-                if new_shares == 0:
-                    db.execute("DELETE FROM shares WHERE user_id = ? AND symbol = ?", user_id, sell_symbol)
+            # 当手中持有股票数量为0，则删除股票记录
+            if new_shares == 0:
+                db.execute("DELETE FROM shares WHERE user_id = ? AND symbol = ?", user_id, sell_symbol)
 
-                return redirect("/")
-            except ValueError as e:
-                return apology(f"{e}", 400)
+            return redirect("/")
 
+        except ValueError as e:
+            return apology(f"{e}", 400)
 
     else:
         shares_all = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
