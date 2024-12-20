@@ -23,7 +23,7 @@
                 <td class="text-end">{{ share["price"] | usd }}</td>
                 <td class="text-end">{{ share["total"] | usd }}</td>
                 <td>
-                  <div class="btn-group">
+                  <div class="d-flex align-items-right">
                     <form action="/sell" method="post">
                         <input name="symbol" type="hidden" value="{{ share['symbol'] }}">
                         <input name="shares" type="hidden" value="{{ share['shares'] }}">
