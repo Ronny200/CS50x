@@ -249,14 +249,23 @@ def register():
 def sell():
     """Sell shares of stock"""
     user_id = session["user_id"]
+
     if request.method == "POST":
-        sell_shares = request.form.get("shares")
+        # 获取要售卖的股票代码和数量
+        sell_shares_str = request.form.get("shares")
         sell_symbol = request.form.get("symbol")
+
         if sell_symbol == "":
             return apology("Missing Symbol", 400)
-        elif sell_shares == "":
+
+        elif sell_shares_str == "":
             return apology("Missing shares", 400)
+
+        elif not sell_shares_str.isdigit() or int(sell_shares_str) <= 0:
+            return apology("Missing shares", 400)
+
         else:
+            sell_shares = int(sell_shares_str)
             user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
             sql_shares = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
 
