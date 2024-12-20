@@ -24,10 +24,16 @@
                 <td class="text-end">{{ share["total"] | usd }}</td>
                 <td>
                   <form action="/sell" method="post">
-                      <input name="id" type="hidden" value="{{ people.id }}">
-                      <button type="submit">delete</button>
+                      <input name="symbol" type="hidden" value="{{ share['symbol'] }}">
+                      <input name="shares" type="hidden" value="{{ share['shares'] }}">
+                      <button type="submit">Sell</button>
                   </form>
-              </td>
+                  <form action="/buy" method="post">
+                    <input name="symbol" type="hidden" value="{{ share['symbol'] }}">
+                    <input name="shares" type="hidden" value="{{ share['shares'] }}">
+                    <button type="submit">Buy</button>
+                </form>
+                </td>
               </tr>
             {% endfor %}
 
