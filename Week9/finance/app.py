@@ -300,7 +300,7 @@ def sell():
 
             return redirect("/")
 
-        except ValueError as e:
+        except Exception as err:
             return apology(f"{e}", 400)
 
     else:
