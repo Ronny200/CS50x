@@ -267,9 +267,9 @@ def sell():
         else:
             sell_shares = int(sell_shares_str)
             user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
-            sql_shares = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
+            shares_info = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
 
-            sql_share = int(sql_shares[0]["shares"])
+            sql_share = int(shares_info[0]["shares"])
             sell_shares = int(sell_shares)
             if sell_shares > sql_share:
                 return apology("Too many shares", 400)
@@ -277,11 +277,11 @@ def sell():
                 current_shares = lookup(sell_symbol)
                 sell_price = current_shares["price"]
                 sell_total_price = round(sell_price * sell_shares, 2)
-                sql_shares = db.execute("SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, sell_symbol)
-                sql_share = int(sql_shares[0]["shares"])
+                shares_info = db.execute("SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, sell_symbol)
+                sql_share = int(shares_info[0]["shares"])
                 new_shares = sql_share - sell_shares
                 new_cash = round(user_cash + sell_total_price, 2)
-                sql_total = int(sql_shares[0]["total"])
+                sql_total = int(shares_info[0]["total"])
                 new_total = round(sql_total - sell_total_price)
 
                 # 更新sql
