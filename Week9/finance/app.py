@@ -301,7 +301,7 @@ def sell():
             return redirect("/")
 
         except Exception as err:
-            return apology(f"{e}", 400)
+            return apology(f"{err}", 400)
 
     else:
         shares_all = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
