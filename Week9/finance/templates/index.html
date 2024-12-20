@@ -25,9 +25,9 @@
                 <td class="text-end">
                   <div class="d-flex align-items-center justify-content-center">
                     <form action="/sell" method="post">
-                        <input name="symbol" type="hidden" value="{{ share['symbol'] }}">
-                        <input name="shares" type="hidden" value="1">
-                        <button type="submit" class="btn btn-outline-primary me-2 btn-sm">Sell</button>
+                      <input name="symbol" type="hidden" value="{{ share['symbol'] }}">
+                      <input name="shares" type="hidden" value="1">
+                      <button type="submit" class="btn btn-outline-primary me-2 btn-sm">Sell</button>
                     </form>
                     <form action="/buy" method="post">
                       <input name="symbol" type="hidden" value="{{ share['symbol'] }}">
