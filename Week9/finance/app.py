@@ -43,6 +43,7 @@ def index():
             current_info = lookup(share["symbol"])
             share["price"] = current_info["price"]
             share["total"] = current_info["price"] * int(share["shares"])
+            
             print(share["symbol"], share["price"], share["shares"], share["total"])
         return render_template("index.html", user_cash = user_cash, shares = user_shares)
     except Exception as err:
