@@ -4,7 +4,9 @@
 {% endblock %}
 
 {% block main %}
-  <div class="mb-5">
-    <p>A share of {{ shares["name"] }}  ({{ shares["symbol"] }}) costs ${{ shares["price"] }}.</p>
+  <div class="mb-5" text>
+    <p>Share: {{ shares["name"] }}</p>
+    <p>Symbol: {{ shares["symbol"] }}</p>
+    <p>Price: {{ shares["price"] | usd }}</p>
   </div>
 {% endblock %}
