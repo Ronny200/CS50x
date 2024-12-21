@@ -38,14 +38,15 @@ def index():
         get_user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)
         user_shares = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
         user_cash = get_user_cash[0]["cash"]
+        totals = user_cash
         print(user_shares)
         for share in user_shares:
             current_info = lookup(share["symbol"])
             share["price"] = current_info["price"]
             share["total"] = current_info["price"] * int(share["shares"])
-            
-            print(share["symbol"], share["price"], share["shares"], share["total"])
-        return render_template("index.html", user_cash = user_cash, shares = user_shares)
+            totals += share["total"]
+
+        return render_template("index.html", user_cash = user_cash, shares = user_shares,  total = totals)
     except Exception as err:
         return apology(f"{err}", 400)
 
