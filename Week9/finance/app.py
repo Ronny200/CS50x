@@ -39,6 +39,9 @@ def index():
         user_shares = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
         user_cash = get_user_cash[0]["cash"]
         print(user_shares)
+        for share in user_shares:
+            share
+            print(share["symbol"], share["price"], share["shares"], share["total"])
         return render_template("index.html", user_cash = user_cash, shares = user_shares)
     except Exception as err:
         return apology(f"{err}", 400)
