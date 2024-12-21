@@ -47,7 +47,7 @@ def index():
             share["total"] = current_info["price"] * int(share["shares"])
             totals += share["total"]
 
-        return render_template("index.html", user_cash = user_cash, shares = user_shares,  total = totals)
+        return render_template("index.html", user_cash=user_cash, shares=user_shares,  total=totals)
 
     except Exception as err:
         return apology(f"{err}", 400)
@@ -96,7 +96,8 @@ def buy():
 
         try:
             # 检查数据库是否已存在当前股票
-            exist_shares = db.execute("SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, symbol)
+            exist_shares = db.execute(
+                "SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, symbol)
 
             # 更新数据库中的股票数据
             if exist_shares:
@@ -105,20 +106,19 @@ def buy():
                 new_total = round(exist_shares[0]["total"] + shares_total_price, 2)
 
                 db.execute("UPDATE shares SET shares = ?, price = ?, total = ? WHERE user_id = ? AND symbol = ?",
-                            new_shares, new_price, new_total, user_id, symbol)
+                           new_shares, new_price, new_total, user_id, symbol)
 
             # 添加新股票
             else:
                 db.execute("INSERT INTO shares (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
-                            user_id, symbol, shares_num, shares_price, shares_total_price)
-
+                           user_id, symbol, shares_num, shares_price, shares_total_price)
 
             # 刷新现有资金
             db.execute("UPDATE users SET cash = ? WHERE id = ?", new_cash, user_id)
 
             # 添加购买历史记录
             db.execute("INSERT INTO history (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
-                        user_id, symbol, shares_num, shares_price, shares_total_price)
+                       user_id, symbol, shares_num, shares_price, shares_total_price)
 
             return redirect("/")
 
@@ -135,8 +135,9 @@ def history():
     """Show history of transactions"""
     user_id = session["user_id"]
     try:
-        history = db.execute("SELECT * FROM history WHERE user_id = ? ORDER BY transacted DESC", user_id)
-        return render_template("history.html", history = history)
+        history = db.execute(
+            "SELECT * FROM history WHERE user_id = ? ORDER BY transacted DESC", user_id)
+        return render_template("history.html", history=history)
     except Exception as err:
         return apology(f"show history error:\n{err}", 400)
 
@@ -205,11 +206,10 @@ def quote():
         if not shares_info:
             return apology("missing symbol", 400)
 
-        return render_template("quoted.html", shares = shares_info)
+        return render_template("quoted.html", shares=shares_info)
 
     else:
         return render_template("quote.html")
-
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -278,7 +278,8 @@ def sell():
         current_shares = lookup(sell_symbol)
         user_cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)[0]["cash"]
 
-        sql_shares_info = db.execute("SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, sell_symbol)
+        sql_shares_info = db.execute(
+            "SELECT * FROM shares WHERE user_id = ? AND symbol = ?", user_id, sell_symbol)
         sql_shares = int(sql_shares_info[0]["shares"])
         sql_total = int(sql_shares_info[0]["total"])
 
@@ -296,18 +297,19 @@ def sell():
 
             # 更新sql
             db.execute("UPDATE shares SET shares = ?, total = ? WHERE user_id = ? AND symbol = ?",
-                            new_shares,  new_total, user_id, sell_symbol)
+                       new_shares,  new_total, user_id, sell_symbol)
 
             # 添加新历史记录
             db.execute("INSERT INTO history (user_id, symbol, shares, price, total) VALUES(?, ?, ?, ?, ?)",
-                        user_id, sell_symbol, -sell_shares, sell_price, sell_total_price)
+                       user_id, sell_symbol, -sell_shares, sell_price, sell_total_price)
 
             # 更新余额
             db.execute("UPDATE users SET cash = ? WHERE id = ?", new_cash, user_id)
 
             # 当手中持有股票数量为0，则删除股票记录
             if new_shares == 0:
-                db.execute("DELETE FROM shares WHERE user_id = ? AND symbol = ?", user_id, sell_symbol)
+                db.execute("DELETE FROM shares WHERE user_id = ? AND symbol = ?",
+                           user_id, sell_symbol)
 
             return redirect("/")
 
@@ -316,4 +318,4 @@ def sell():
 
     else:
         shares_all = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
-        return render_template("sell.html", symbols = shares_all)
+        return render_template("sell.html", symbols=shares_all)
