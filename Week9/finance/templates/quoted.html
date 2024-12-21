@@ -4,9 +4,11 @@
 {% endblock %}
 
 {% block main %}
-  <div class="mb-5 justify-content-center">
-      <p class="text-start">Share: {{ shares["name"] }}</p>
-      <p class="text-start">Symbol: {{ shares["symbol"] }}</p>
-      <p class="text-start">Price: {{ shares["price"] | usd }}</p>
+  <div class="mb-5">
+    <div>
+      <p>Share: {{ shares["name"] }}</p>
+      <p>Symbol: {{ shares["symbol"] }}</p>
+      <p>Price: {{ shares["price"] | usd }}</p>
+    </div>
   </div>
 {% endblock %}
