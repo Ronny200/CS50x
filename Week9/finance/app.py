@@ -237,6 +237,7 @@ def register():
             user_id = db.execute("SELECT id FROM users WHERE username = ?", username)[0]["id"]
             session["user_id"] = user_id
             return redirect("/")
+
         except Exception as err:
             return apology(f"username taken\n{err}", 400)
 
