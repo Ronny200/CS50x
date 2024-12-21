@@ -135,7 +135,7 @@ def history():
     """Show history of transactions"""
     user_id = session["user_id"]
     try:
-        history = db.execute("SELECT * FROM history WHERE user_id = ?", user_id)
+        history = db.execute("SELECT * FROM history WHERE user_id = ? ORDER BY transacted DESC", user_id)
         return render_template("history.html", history = history)
     except Exception as err:
         return apology(f"show history error:\n{err}", 400)
