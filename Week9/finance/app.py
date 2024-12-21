@@ -40,6 +40,7 @@ def index():
         user_cash = get_user_cash[0]["cash"]
         totals = user_cash
         print(user_shares)
+
         for share in user_shares:
             current_info = lookup(share["symbol"])
             share["price"] = current_info["price"]
@@ -47,6 +48,7 @@ def index():
             totals += share["total"]
 
         return render_template("index.html", user_cash = user_cash, shares = user_shares,  total = totals)
+
     except Exception as err:
         return apology(f"{err}", 400)
 
