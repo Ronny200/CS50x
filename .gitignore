@@ -61,3 +61,8 @@ dkms.conf
 # compress
 *.zip
 *.7z
+
+# others
+*.mp4
+*.bmp
+convert/
