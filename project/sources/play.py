@@ -7,6 +7,11 @@ from pathlib import Path
 from subprocess import run, CalledProcessError, check_output
 
 
+def move_cursor_to_top():
+    """使用 ANSI 转义序列将光标移动到屏幕顶部"""
+    print("\033[H", end="")
+
+
 def play_ascii_art(asc_dir, fps=25):
     """
     按顺序播放给定目录下的所有 .txt ASCII 艺术图画，并按照指定的帧率播放。
@@ -33,24 +38,14 @@ def play_ascii_art(asc_dir, fps=25):
             with open(txt_file, "r", encoding="utf-8") as file:
                 content = file.read()
 
-            # 清屏并打印当前帧的内容
-            clear_screen()
-            print(content)
+            # 将光标重新移动到顶部
+            move_cursor_to_top()
+            print(content, end="")
 
             # 等待一段时间以保持指定的帧率
             time.sleep(delay)
     except KeyboardInterrupt:
         print("\nPlayback interrupted by user.")
-
-
-def clear_screen():
-    """根据操作系统清空控制台屏幕"""
-    import platform
-
-    if platform.system() == "Windows":
-        os.system("cls")
-    else:
-        os.system("clear")
 
 
 def play_audio(path):

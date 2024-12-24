@@ -144,7 +144,7 @@ def convert_txt_path(bmp_path, asc_dir):
     return new_file_path
 
 
-# 转换MP4为BMP文件
+# 转换bmp为ascii
 def convert_to_asc(bmp_path, txt_path):
     try:
         # 使用bmp2asc将bmp转成ascii字符图
