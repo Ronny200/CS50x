@@ -2,6 +2,49 @@
 #### Video Demo:  <URL HERE>
 #### Description: Automatically convert an MP4 video file into a black and white ASCII string animation.
 
+
+Inspired by the filter-more assignment, I decided to extract frames from an MP4 video as BMP images and then convert each image into corresponding ASCII strings. When these ASCII strings are output sequentially, they form an ASCII string animation.
+
+Given Python's convenience in file handling and string processing, I chose Python as the main program language. However, for handling each image, C is used because it offers more efficient performance when dealing with binary files.
+
+This combination leverages both the ease of use and maintainability of Python and the high efficiency of C, making the code easier to maintain.
+
+> **Usage**: Place `bmp2asc.exe` and the MP4 file you want to convert (`convert.mp4`) in the same directory as `ascii_mov.py`, and ensure that `ffmpeg.exe` and `ffplay.exe` are installed.
+
+#### Using FFmpeg
+Initially, I intended to process images directly using knowledge gained from CS50. After careful consideration, I opted to use FFmpeg to achieve specific functionalities, such as extracting BMP images frame-by-frame and flipping them.
+
+During the conversion of images to ASCII strings in C, arrays are processed sequentially, causing some images to be flipped. Additionally, FFmpeg is required to extract images and audio files from the video. Therefore, I decided to use FFmpeg due to its efficiency and superior results.
+
+When playing the ASCII animation, background music is played using `ffplay`.
+
+#### ascii_mov.py
+This is the main entry point of the program. It defines paths and calls various functions. The code is kept concise to ensure the main function remains simple and easy to maintain.
+
+#### bin\bmp2asc.c
+This file contains C code for handling BMP images.
+
+The approach is based on the logic from the filter assignment, where BMP images are averaged for their grayscale values, and corresponding ASCII characters are used to fill in based on these grayscale values. The width of the output string can be customized via command-line arguments.
+
+#### sources\ffmpeg.py
+This file handles BMP image processing:
+
+- **ensure_directory**: Verifies if the output directory exists; if it does, it clears the directory.
+- **convert_to_bmp**: Converts the video file into BMP images using FFmpeg.
+- **get_audio_code**: Retrieves the format of the audio in the MP4 video file (e.g., AAC or WAV).
+- **extract_to_wav**: Extracts the audio from the MP4 video file.
+- **convert_to_asc**: Converts BMP images into ASCII strings.
+- **convert_txt_path**: Constructs the corresponding TXT filename from the image name.
+- **get_bmp**: Retrieves all BMP images from the extracted folder as relative paths.
+
+#### sources\play.py
+This file contains playback-related functions:
+
+- **move_cursor_to_top**: Moves the cursor to the top of the screen after each string output. Initially, I used the `clear` command, which caused flickering. Moving the cursor position instead eliminates this issue.
+- **play_ascii_art**: Loops through and plays all ASCII strings.
+- **play_audio**: Uses subprocess to play the background music synchronously.
+
+---
 受到filter-more这一作业的启发，想到将mp4按照帧提取成bmp图片，然后将每一张图片都转换成对应的ascii字符串，连续输出的情况下相当于变成了ascii字符串的动画。
 
 由于python对文件的调用，对字符串处理的方便性，所以用python代码作为主程序，用c来处理每张图片，因为c在处理二进制文件上的性能更高效。
