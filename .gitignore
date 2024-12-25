@@ -65,4 +65,6 @@ dkms.conf
 # others
 *.mp4
 *.bmp
+*.txt
 convert/
+out/

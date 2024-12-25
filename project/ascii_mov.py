@@ -1,40 +1,70 @@
+import sources.play as p
+import sources.ffmpeg as f
+import argparse
 import sys
-
-from sources.play import play_ascii_art, play_audio, move_cursor_to_top
-from sources.ffmpeg import (
-    convert_to_bmp,
-    extract_to_wav,
-    get_bmp,
-    convert_to_asc,
-    convert_txt_path,
-    clear_console_subprocess,
-)
 
 
 def main():
-    # 定义默认路径
-    music_name = r"convert\wav\convert.aac"
-    bmp_path = r"convert\bmp"
-    asc_path = r"convert\asc"
-    wav_path = r"convert\wav"
-    mp4 = r"convert.mp4"
-    fps = 25
+    # 添加命令行参数
+    parser = argparse.ArgumentParser(
+        description="Convert the mp4 file to ascii mov.",
+    )
+    parser.add_argument(
+        "-c",
+        "--convert",
+        type=str,
+        metavar="mp4_file",
+        help="auto convert and play ascii mov.",
+    )
+    parser.add_argument(
+        "-p",
+        "--play",
+        type=str,
+        metavar="mp4_file",
+        help="play ascii mov.",
+    )
 
-    convert_to_bmp(mp4, bmp_path)
-    extract_to_wav(mp4, wav_path)
-    all_bmps = get_bmp(bmp_path)
+    # 判断命令行参数
+    args = parser.parse_args()
+    info = {}
 
-    print("convert bmp to ascii...")
-    for bmp in all_bmps:
-        convert_to_asc(bmp, convert_txt_path(bmp, asc_path))
+    if args.convert:
+        info = f.parse_filename(args.convert)
+        f.ensure_directory(info["temp_folder"])
 
-    try:
-        clear_console_subprocess()
-        move_cursor_to_top()
-        play_audio(music_name)
-        play_ascii_art(asc_path, fps)
-    except KeyboardInterrupt:
-        print("\nProgram interrupted by user.")
+        print("start convert mp4 to bmp...")
+        f.convert_to_bmp(info["file_name"], info["temp_folder"])
+
+        print("start extract music...")
+        f.extract_to_wav(info["file_name"], info["folder_path"])
+
+        print("start convert all bmp to ascii...")
+        f.convert_bmp_asc(info["temp_folder"], info["folder_path"])
+
+        f.ensure_directory(info["temp_folder"])
+
+        try:
+            f.clear_console_subprocess()
+            p.move_cursor_to_top()
+            p.play_audio(info["audio_file"])
+            p.play_ascii_art(info["folder_path"], info["fps"])
+
+        except KeyboardInterrupt:
+            print("\nProgram interrupted by user.")
+            sys.exit(1)
+
+    elif args.play:
+        # 直接播放ascii动画
+        info = f.parse_filename(args.play)
+
+        if f.ensure_art_directory(info["folder_path"]):
+            f.clear_console_subprocess()
+            p.move_cursor_to_top()
+            p.play_audio(info["audio_file"])
+            p.play_ascii_art(info["folder_path"], info["fps"])
+
+    else:
+        parser.print_help()
         sys.exit(1)
 
 

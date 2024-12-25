@@ -1,10 +1,7 @@
-import os
 import time
 import subprocess
 
-
 from pathlib import Path
-from subprocess import run, CalledProcessError, check_output
 
 
 def move_cursor_to_top():

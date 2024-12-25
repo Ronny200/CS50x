@@ -4,12 +4,64 @@ from subprocess import run, CalledProcessError, check_output, call
 from pathlib import Path
 
 
+def ensure_art_directory(folder):
+    file_path = Path(folder)
+    if not isinstance(file_path, Path):
+        return False
+
+    if file_path.exists() and file_path.is_dir():
+        return True
+
+
+def parse_filename(file_name, base_output_dir="out"):
+    """
+    接收一个文件名，并返回一个包含名字、文件名、文件夹路径的字典。
+
+    参数:
+    file_name (str): 文件名，例如 'convert.mp4'。
+    base_output_dir (str): 输出文件夹的基本路径，默认为 'out'。
+
+    返回:
+    dict: 包含以下键值对的字典：
+        - 'name': 文件的基础名称（不包括扩展名）
+        - 'file_name': 完整的文件名（包括扩展名）
+        - 'folder_path': 文件夹路径
+        - 'audio_file': 音频文件路径
+    """
+    # 创建 Path 对象
+    file_path = Path(file_name)
+
+    # 提取文件的基础名称（不包括扩展名）
+    name = file_path.stem
+
+    # 保留完整的文件名
+    file_name_with_ext = file_path.name
+
+    # 构建输出文件夹路径
+    folder_path = Path(base_output_dir) / name
+
+    # 构建音频文件路径
+    audio_file = folder_path / f"{name}.aac"
+
+    # 确保输出文件夹存在
+    folder_path.mkdir(parents=True, exist_ok=True)
+
+    return {
+        "name": name,
+        "file_name": file_name_with_ext,
+        "folder_path": str(folder_path),
+        "audio_file": str(audio_file),
+        "temp_folder": "convert",
+        "fps": 25,
+    }
+
+
 # 清理控制台
 def clear_console_subprocess():
     call("cls", shell=True)
 
 
-def get_bmp(directory):
+def convert_bmp_asc(directory, asc_path):
     try:
         # 获取目录下所有的文件和子目录
         with os.scandir(directory) as entries:
@@ -19,7 +71,12 @@ def get_bmp(directory):
                 for entry in entries
                 if entry.is_file() and entry.name.lower().endswith(".bmp")
             ]
-        return bmp_files
+
+        for bmp in bmp_files:
+            bmp_to_asc(bmp, convert_txt_path(bmp, asc_path))
+            print(bmp, convert_txt_path(bmp, asc_path))
+
+        return True
     except FileNotFoundError:
         print(f"The directory {directory} does not exist.")
         return []
@@ -150,7 +207,7 @@ def convert_txt_path(bmp_path, asc_dir):
 
 
 # 转换bmp为ascii
-def convert_to_asc(bmp_path, txt_path):
+def bmp_to_asc(bmp_path, txt_path):
     try:
         # 使用bmp2asc将bmp转成ascii字符图
         convert = run(
