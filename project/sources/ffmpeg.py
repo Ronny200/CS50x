@@ -1,7 +1,12 @@
 import os
 import shutil
-from subprocess import run, CalledProcessError, check_output
+from subprocess import run, CalledProcessError, check_output, call
 from pathlib import Path
+
+
+# 清理控制台
+def clear_console_subprocess():
+    call("cls", shell=True)
 
 
 def get_bmp(directory):
@@ -61,7 +66,7 @@ def convert_to_bmp(mp4_path, out_path):
         ensure_directory(out_path)
 
         # 输出文件名格式，默认0001.bmp
-        output_pattern = os.path.join(out_path, "output_%04d.bmp")
+        output_pattern = os.path.join(out_path, "output_%06d.bmp")
 
         # 使用ffmpeg提取视频为bmp
         convert = run(
@@ -78,7 +83,7 @@ def convert_to_bmp(mp4_path, out_path):
             check=True,
         )
 
-        print("sucesfull")
+        print("convert to bmp sucesfull.")
     except CalledProcessError as e:
         print(f"转换错误: {e}")
 
@@ -110,7 +115,7 @@ def extract_to_wav(mp4_path, out_path):
             check=True,
         )
 
-        print("sucesfull")
+        print("extract sucesfull.")
     except CalledProcessError as e:
         print(f"转换错误: {e}")
 
@@ -159,7 +164,6 @@ def convert_to_asc(bmp_path, txt_path):
             check=True,
         )
 
-        print("sucesfull")
     except CalledProcessError as e:
         print(f"转换错误: {e}")
 
