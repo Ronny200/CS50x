@@ -1,5 +1,5 @@
 # MP4 to Ascii mov
-#### Video Demo:  <URL HERE>
+#### Video Demo:  [<URL HERE>](https://youtu.be/lA1JiGS7PQk)
 #### Description: Automatically convert an MP4 video file into a black and white ASCII string animation.
 
 
